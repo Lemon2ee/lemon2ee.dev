@@ -10,8 +10,7 @@ export default async function Blog({
   const blogPostName = params.slug;
   console.log("about to import the blog component");
   const Blog = dynamic(() => import("@/posts/" + blogPostName + ".mdx"), {
-    loading: () => <p>Loading...</p>,
-    ssr: true,
+    ssr: false,
   });
 
   return (
