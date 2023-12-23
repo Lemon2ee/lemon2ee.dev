@@ -13,8 +13,9 @@ export default async function Blog({
   //   ssr: true,
   // });
 
-  const Test: MDXContent = (await import("@/posts/" + blogPostName + ".mdx"))
-    .default;
+  const Test: MDXContent = (
+    await import("@/app/posts/" + blogPostName + ".mdx")
+  ).default;
 
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
