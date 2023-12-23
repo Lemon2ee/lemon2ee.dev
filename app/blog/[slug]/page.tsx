@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { MDXContent } from "mdx/types";
 
 export default async function Blog({
   params,
@@ -12,6 +11,8 @@ export default async function Blog({
   const Blog = dynamic(() => import("@/posts/" + blogPostName + ".mdx"), {
     ssr: true,
   });
+
+  console.log(Blog);
 
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
