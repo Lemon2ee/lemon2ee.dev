@@ -11,13 +11,7 @@ export default async function Blog({
 }) {
   const blogPostName = params.slug;
   const Blog: React.ComponentType<MDXProps> = dynamic(
-    () =>
-      import("@/posts/" + blogPostName + ".mdx")
-        .then((mod) => mod.default)
-        .then((mod) => {
-          console.log(mod);
-          return mod;
-        }),
+    () => import("@/posts/" + blogPostName + ".mdx"),
     {
       ssr: true,
     },
