@@ -1,12 +1,14 @@
 import Link from "next/link";
-import { fetchAllMetaData } from "@/lib/blogPostApi";
+import { fetchAllMetaData, sortBlogPostsByDate } from "@/lib/blogPostApi";
 import { MetaData } from "@/types/blog";
 
 export default async function Blog() {
-  const allBlogPosts: MetaData[] = await fetchAllMetaData();
+  const sortedBlogPosts: MetaData[] = sortBlogPostsByDate(
+    await fetchAllMetaData(),
+  );
   return (
     <div>
-      {allBlogPosts.map((post) => (
+      {sortedBlogPosts.map((post) => (
         <Link key={post.slug} href={`/blog/${post.slug}`}>
           <div className={"py-4"}>
             <h1 className={"text-base font-bold"}>{post.title}</h1>

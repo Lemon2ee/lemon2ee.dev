@@ -27,3 +27,12 @@ export async function fetchAllMetaData(): Promise<MetaData[]> {
 
   return allMetaData;
 }
+
+// Function to sort blog posts by date in descending order
+export function sortBlogPostsByDate(blogPosts: MetaData[]): MetaData[] {
+  return blogPosts.sort((a, b) => {
+    const dateA = new Date(a.writtenAt);
+    const dateB = new Date(b.writtenAt);
+    return dateB.getTime() - dateA.getTime(); // Latest posts first
+  });
+}

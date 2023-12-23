@@ -4,5 +4,6 @@ export type MetaData = {
   title: string;
   slug: string;
   description: string;
+  writtenAt: string;
   topics: string[];
 };

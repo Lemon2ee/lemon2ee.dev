@@ -10,7 +10,7 @@ export default async function Blog({
   const blogPostName = params.slug;
   const Blog = dynamic(() => import("@/_posts/" + blogPostName + ".mdx"));
   return (
-    <article className={"prose prose-custom dark:prose-invert"}>
+    <article className={"prose pt-4 prose-custom dark:prose-invert"}>
       <Blog />
     </article>
   );

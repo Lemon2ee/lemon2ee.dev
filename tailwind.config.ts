@@ -38,6 +38,14 @@ const config: Config = {
       typography: ({ theme }: any) => ({
         custom: {
           css: {
+            code: {
+              "&::before": {
+                content: '"" !important',
+              },
+              "&::after": {
+                content: '"" !important',
+              },
+            },
             "--tw-prose-body": theme("colors.neutral[800]"),
             "--tw-prose-headings": theme("colors.neutral[900]"),
             "--tw-prose-lead": theme("colors.neutral[700]"),
