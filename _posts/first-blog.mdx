@@ -27,13 +27,13 @@ think it is very safe to say that it will be a long-term project, and I no longe
 being lost due to a mistake in the migration process (cuz it's completely on GitHub right now!!!).
 
 The developing process, at least for this 0.1.0 version, is very straightforward, I have designated to have all the
-blog stored in a folder called `_posts`, and I have a blog post api implemented as follows to read and load all the
+blog stored in a folder called `posts`, and I have a blog post api implemented as follows to read and load all the
 metadata embedded in the mdx file
 
 ```ts filename="/lib/blogPostApi.ts"
-// Function to fetch metadata from all MDX files in the _posts folder
+// Function to fetch metadata from all MDX files in the posts folder
 export async function fetchAllMetaData(): Promise<MetaData[]> {
-  const postsDirectory = path.join(process.cwd(), "_posts");
+  const postsDirectory = path.join(process.cwd(), "posts");
   const filenames = fs.readdirSync(postsDirectory);
   const allMetaData: MetaData[] = [];
 
@@ -61,7 +61,7 @@ export async function fetchAllMetaData(): Promise<MetaData[]> {
 And the project folder structure is as follows
 ```text
 .
-├── _posts                      # All the blog posts
+├── posts                      # All the blog posts
 ├── app/
 │   ├── blog/                   # Blog page
 │   │   └── {blog_slug}         # Individual blog page
