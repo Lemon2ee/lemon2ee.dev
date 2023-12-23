@@ -8,7 +8,7 @@ export default async function Blog() {
   );
   return (
     <div>
-      {sortedBlogPosts.map((post) => (
+      {sortedBlogPosts.map((post: MetaData) => (
         <Link key={post.slug} href={`/blog/${post.slug}`}>
           <div className={"py-4"}>
             <h1 className={"text-base font-bold"}>{post.title}</h1>
