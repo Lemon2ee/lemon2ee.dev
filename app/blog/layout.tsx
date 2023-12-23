@@ -8,7 +8,7 @@ export default function BlogLayout({
 }) {
   return (
     <body>
-      <main className={"px-5 py-7 mx-auto max-w-xl"}>
+      <main className={"px-5 py-8 lg:py-20 mx-auto max-w-xl"}>
         <Navbar />
         {children}
       </main>
