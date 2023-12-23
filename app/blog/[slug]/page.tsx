@@ -10,12 +10,14 @@ export default function Blog({
   };
 }) {
   const blogPostName = params.slug;
-  const Blog: React.ComponentType<MDXProps> = dynamic(
-    () => import("@/posts/" + blogPostName + ".mdx"),
-    {
+  let Blog: React.ComponentType<MDXProps>;
+  try {
+    Blog = dynamic(() => import("@/posts/" + blogPostName + ".mdx"), {
       ssr: false,
-    },
-  );
+    });
+  } catch (e) {
+    return null;
+  }
 
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
