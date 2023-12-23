@@ -54,7 +54,7 @@ const config: Config = {
             "--tw-prose-pre-bg": theme("colors.white"),
             "--tw-prose-th-borders": theme("colors.neutral[300]"),
             "--tw-prose-td-borders": theme("colors.neutral[200]"),
-            "--tw-prose-invert-body": theme("colors.amber[50]"),
+            "--tw-prose-invert-body": theme("colors.neutral[200]"),
             "--tw-prose-invert-headings": theme("colors.white"),
             "--tw-prose-invert-lead": theme("colors.neutral[300]"),
             "--tw-prose-invert-links": theme("colors.white"),

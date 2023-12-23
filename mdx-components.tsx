@@ -6,6 +6,7 @@ import {
   CustomUnorderedList,
 } from "@/app/components/mdx/List";
 import { Code } from "@/app/components/mdx/Code";
+import { RoundedImage } from "@/app/components/mdx/Image";
 
 // must not be exported with default
 // will cause `Attempted import error: 'useMDXComponents' is not exported from 'next-mdx-import-source-file' (imported
@@ -22,6 +23,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     code: Code,
     ul: CustomUnorderedList,
     ol: CustomOrderedList,
+    Image: RoundedImage,
     ...components,
   };
 }
