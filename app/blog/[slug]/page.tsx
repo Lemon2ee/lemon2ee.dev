@@ -13,13 +13,15 @@ export default async function Blog({
   //   ssr: true,
   // });
 
-  const Test: MDXContent = (
-    await import("@/app/posts/" + blogPostName + ".mdx")
-  ).default;
+  const Blog = await fetch("/posts/" + blogPostName + ".mdx").then((res) =>
+    res.text(),
+  );
+
+  const MDX = Blog as unknown as MDXContent;
 
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
-      <Test />
+      <MDX />
     </article>
   );
 }
