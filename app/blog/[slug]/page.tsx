@@ -13,7 +13,6 @@ export default async function Blog({
     loading: () => <p>Loading...</p>,
     ssr: true,
   });
-  console.log("finished loading");
 
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
