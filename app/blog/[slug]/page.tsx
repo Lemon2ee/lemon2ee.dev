@@ -9,19 +9,13 @@ export default async function Blog({
   };
 }) {
   const blogPostName = params.slug;
-  // const Blog = dynamic(() => import("@/posts/" + blogPostName + ".mdx"), {
-  //   ssr: true,
-  // });
-
-  const Blog = await fetch("/posts/" + blogPostName + ".mdx").then((res) =>
-    res.text(),
-  );
-
-  const MDX = Blog as unknown as MDXContent;
+  const Blog = dynamic(() => import("@/posts/" + blogPostName + ".mdx"), {
+    ssr: true,
+  });
 
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
-      <MDX />
+      <Blog />
     </article>
   );
 }
