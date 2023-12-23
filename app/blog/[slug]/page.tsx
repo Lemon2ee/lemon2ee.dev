@@ -12,8 +12,8 @@ export default async function Blog({
     () => import("@/_posts/" + blogPostName + ".mdx"),
   );
   return (
-    <div className={"prose"}>
+    <article className={"prose dark:prose-code:bg-black"}>
       <MyComponent />
-    </div>
+    </article>
   );
 }

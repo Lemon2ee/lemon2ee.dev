@@ -7,11 +7,9 @@ export default function BlogLayout({
   children: React.ReactNode;
 }) {
   return (
-    <body>
-      <main className={"px-5 py-8 lg:py-20 mx-auto max-w-xl"}>
-        <Navbar />
-        {children}
-      </main>
-    </body>
+    <main className={"px-5 py-8 lg:py-20 mx-auto max-w-2xl"}>
+      <Navbar />
+      {children}
+    </main>
   );
 }
