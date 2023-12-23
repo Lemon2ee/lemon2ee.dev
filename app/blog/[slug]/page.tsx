@@ -2,7 +2,7 @@ import dynamic from "next/dynamic";
 import { MDXProps } from "mdx/types";
 import React from "react";
 
-export default async function Blog({
+export default function Blog({
   params,
 }: {
   params: {
@@ -13,7 +13,7 @@ export default async function Blog({
   const Blog: React.ComponentType<MDXProps> = dynamic(
     () => import("@/posts/" + blogPostName + ".mdx"),
     {
-      ssr: true,
+      ssr: false,
     },
   );
 
