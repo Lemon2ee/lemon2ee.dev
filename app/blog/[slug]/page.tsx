@@ -12,7 +12,7 @@ export default async function Blog({
     () => import("@/_posts/" + blogPostName + ".mdx"),
   );
   return (
-    <article className={"prose dark:prose-code:bg-black"}>
+    <article className={"prose prose-custom dark:prose-invert"}>
       <MyComponent />
     </article>
   );
