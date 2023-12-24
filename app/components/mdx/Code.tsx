@@ -1,4 +1,5 @@
-import hljs from "highlight.js";
+import { highlight } from 'sugar-high'
+
 // Find a better way of pre-process this on the server side
 // import "./code.css";
 import "./code.css";
@@ -6,7 +7,7 @@ import "./code.css";
 // in the css file)
 // right now I think this is not a bad way of implementing this, because we can modify the theme easily
 export function Code({ children, ...props }: any) {
-  const highlightedCode = hljs.highlightAuto(children).value;
+  const highlightedCode = highlight(children);
   return (
     <code dangerouslySetInnerHTML={{ __html: highlightedCode }} {...props} />
   );

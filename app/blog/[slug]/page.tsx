@@ -1,5 +1,9 @@
 import dynamic from "next/dynamic";
 
+export function generateStaticParams() {
+  return [{ slug: 'test' }, { slug: 'first-blog' }]
+}
+
 export default async function Blog({
   params,
 }: {
