@@ -5,8 +5,8 @@ const nextConfig = {
   // Configure `pageExtensions` to include MDX files
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   experimental: {
-      serverComponentsExternalPackages: ['shiki', 'vscode-oniguruma']
- }
+    serverComponentsExternalPackages: ["shiki", "vscode-oniguruma"],
+  },
   // Optionally, add any other Next.js config below
 };
 

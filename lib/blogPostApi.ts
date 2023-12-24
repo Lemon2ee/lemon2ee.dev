@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { MetaData } from "@/types/blog";
+import { MetaData } from "@/types/blog"; // Function to fetch metadata from all MDX files in the posts folder
 
 // Function to fetch metadata from all MDX files in the posts folder
 export async function fetchAllMetaData(): Promise<MetaData[]> {
