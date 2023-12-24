@@ -1,8 +1,10 @@
 import dynamic from "next/dynamic";
-import { MDXProps } from "mdx/types";
-import React from "react";
 
-export default function Blog({
+export function generateStaticParams() {
+  return [{ slug: 'test' }, { slug: 'first-blog' }]
+}
+
+export default async function Blog({
   params,
 }: {
   params: {
@@ -10,15 +12,7 @@ export default function Blog({
   };
 }) {
   const blogPostName = params.slug;
-  let Blog: React.ComponentType<MDXProps>;
-  try {
-    Blog = dynamic(() => import("@/posts/" + blogPostName + ".mdx"), {
-      ssr: false,
-    });
-  } catch (e) {
-    return null;
-  }
-
+  const Blog = dynamic(() => import("@/_posts/" + blogPostName + ".mdx"));
   return (
     <article className={"prose pt-4 prose-custom dark:prose-invert"}>
       <Blog />
