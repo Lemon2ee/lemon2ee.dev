@@ -1,10 +1,11 @@
 import { highlight } from "@/lib/shiki";
 import { isSingleLine } from "@/lib/utils";
+import "./code.css";
 
 export async function Code({ children, ...props }: any) {
   const propsClassName = props["className"] || "language-md";
   const language = propsClassName.split("language-")[1];
-  let html = await highlight(children, "dracula", language);
+  let html = await highlight(children, language);
   if (isSingleLine(children)) {
     html = removePreTag(html);
   }
