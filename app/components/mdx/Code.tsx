@@ -1,10 +1,29 @@
 import { highlight } from "@/lib/shiki";
-// this part of the website uses a custom theme css, so we need to adapt the dark theme differently (i.e. directly
-// in the css file)
-// right now I think this is not a bad way of implementing this, because we can modify the theme easily
+import { isSingleLine } from "@/lib/utils";
+
 export async function Code({ children, ...props }: any) {
   const propsClassName = props["className"] || "language-md";
   const language = propsClassName.split("language-")[1];
-  const html = await highlight(children, "github-dark", language);
+  let html = await highlight(children, "dracula", language);
+  if (isSingleLine(children)) {
+    html = removePreTag(html);
+  }
+
+  // right now it would be pre->code->pre(shiki)->code(shiki), might be better to remove the pre tag
   return <code dangerouslySetInnerHTML={{ __html: html }} {...props} />;
+}
+
+function removePreTag(htmlString: string): string {
+  // Regular expression to find the pre tag and its content
+  const preTagRegex = /<pre[^>]*>((.|\n|\r\n)*)<\/pre>/;
+
+  // Match the pre tag and its content
+  const match = htmlString.match(preTagRegex);
+
+  if (match && match[1]) {
+    // Return only the content inside the pre tag
+    return match[1];
+  }
+
+  return htmlString;
 }

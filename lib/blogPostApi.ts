@@ -1,10 +1,10 @@
 import fs from "fs";
 import path from "path";
-import { MetaData } from "@/types/blog"; // Function to fetch metadata from all MDX files in the posts folder
+import { MetaData } from "@/types/blog"; // Function to fetch metadata from all MDX files in the _posts folder
 
-// Function to fetch metadata from all MDX files in the posts folder
+// Function to fetch metadata from all MDX files in the _posts folder
 export async function fetchAllMetaData(): Promise<MetaData[]> {
-  const postsDirectory = path.join(process.cwd(), "posts");
+  const postsDirectory = path.join(process.cwd(), "_posts");
   const filenames = fs.readdirSync(postsDirectory);
   const allMetaData: MetaData[] = [];
 
@@ -28,11 +28,11 @@ export async function fetchAllMetaData(): Promise<MetaData[]> {
   return allMetaData;
 }
 
-// Function to sort blog posts by date in descending order
+// Function to sort blog _posts by date in descending order
 export function sortBlogPostsByDate(blogPosts: MetaData[]): MetaData[] {
   return blogPosts.sort((a, b) => {
     const dateA = new Date(a.writtenAt);
     const dateB = new Date(b.writtenAt);
-    return dateB.getTime() - dateA.getTime(); // Latest posts first
+    return dateB.getTime() - dateA.getTime(); // Latest _posts first
   });
 }
