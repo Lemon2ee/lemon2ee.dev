@@ -27,14 +27,14 @@ export async function highlight(code: string, lang: string) {
   if (!highlighter) {
     highlighter = await getHighlighter({
       langs: Object.keys(bundledLanguages),
-      themes: ["nord", "dracula", "vitesse-light"],
+      themes: ["dracula", "solarized-light"],
     });
   }
 
   return highlighter.codeToHtml(code, {
     lang: lang,
     themes: {
-      light: "vitesse-light",
+      light: "solarized-light",
       dark: "dracula",
     },
   });
