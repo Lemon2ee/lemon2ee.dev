@@ -30,7 +30,7 @@ The developing process, at least for this 0.1.0 version, is very straightforward
 blog stored in a folder called `_posts`, and I have a blog post api implemented as follows to read and load all the
 metadata embedded in the mdx file
 
-```ts filename="/lib/blogPostApi.ts"
+```ts
 // Function to fetch metadata from all MDX files in the _posts folder
 export async function fetchAllMetaData(): Promise<MetaData[]> {
   const postsDirectory = path.join(process.cwd(), "_posts");
@@ -59,7 +59,7 @@ export async function fetchAllMetaData(): Promise<MetaData[]> {
 ```
 
 And the project folder structure is as follows
-```text
+```md
 .
 ├── _posts                      # All the blog posts
 ├── app/
