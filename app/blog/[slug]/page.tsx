@@ -1,7 +1,10 @@
 import dynamic from "next/dynamic";
+import { MetaData } from "@/types/blog";
+import { fetchAllMetaData } from "@/lib/blogPostApi";
 
-export function generateStaticParams() {
-  return [{ slug: "test" }, { slug: "first-blog" }];
+export async function generateStaticParams() {
+  const blogPostsMeta: MetaData[] = fetchAllMetaData();
+  return blogPostsMeta.map((post) => ({ slug: post.slug }));
 }
 
 export default async function Blog({

@@ -3,9 +3,7 @@ import { fetchAllMetaData, sortBlogPostsByDate } from "@/lib/blogPostApi";
 import { MetaData } from "@/types/blog";
 
 export default async function Blog() {
-  const sortedBlogPosts: MetaData[] = sortBlogPostsByDate(
-    await fetchAllMetaData(),
-  );
+  const sortedBlogPosts: MetaData[] = sortBlogPostsByDate(fetchAllMetaData());
   return (
     <div>
       {sortedBlogPosts.map((post: MetaData) => (

@@ -3,7 +3,7 @@ import path from "path";
 import { MetaData } from "@/types/blog"; // Function to fetch metadata from all MDX files in the _posts folder
 
 // Function to fetch metadata from all MDX files in the _posts folder
-export async function fetchAllMetaData(): Promise<MetaData[]> {
+export function fetchAllMetaData(): MetaData[] {
   const postsDirectory = path.join(process.cwd(), "_posts");
   const filenames = fs.readdirSync(postsDirectory);
   const allMetaData: MetaData[] = [];
