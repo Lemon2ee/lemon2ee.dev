@@ -22,8 +22,16 @@ function removePreTag(htmlString: string): string {
   const match = htmlString.match(preTagRegex);
 
   if (match && match[1]) {
-    // Return only the content inside the pre tag
-    return match[1];
+    // Modify the code tag within the matched content
+    return match[1].replace(/<code([^>]*)>/, (match, group1) => {
+      if (group1.includes("class=")) {
+        // If class attribute exists, append "shiki" to it
+        return match.replace(/class="([^"]*)"/, 'class="$1 shiki"');
+      } else {
+        // If class attribute doesn't exist, add class="shiki"
+        return '<code class="shiki"' + group1 + ">";
+      }
+    });
   }
 
   return htmlString;
