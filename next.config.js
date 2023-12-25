@@ -7,6 +7,9 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["shiki", "vscode-oniguruma"],
   },
+  images: {
+    domains: ["raw.githubusercontent.com"],
+  },
   // Optionally, add any other Next.js config below
 };
 
