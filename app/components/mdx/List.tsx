@@ -1,5 +1,5 @@
 export function CustomUnorderedList({ children }: any) {
-  return <ul className="list-outside list-disc">{children}</ul>;
+  return <ul className="list-inside list-disc">{children}</ul>;
 }
 
 export function CustomOrderedList({ children }: any) {
