@@ -29,7 +29,7 @@ function removePreTag(htmlString: string): string {
         return match.replace(/class="([^"]*)"/, 'class="$1 shiki"');
       } else {
         // If class attribute doesn't exist, add class="shiki"
-        return '<code class="shiki"' + group1 + ">";
+        return '<code class="shiki break-all"' + group1 + ">";
       }
     });
   }
