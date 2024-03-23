@@ -18,6 +18,7 @@ export function fetchAllMetaData(): MetaData[] {
       try {
         // Evaluate the string as an object
         const metaData = eval("(" + metaMatch[1] + ")");
+        metaData.slug = filename.replace(/\.mdx$/, "");
         allMetaData.push(metaData as MetaData);
       } catch (error) {
         console.error(`Error parsing metadata in file ${filename}: `, error);
