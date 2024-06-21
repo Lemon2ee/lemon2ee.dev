@@ -15,6 +15,10 @@ export async function Code({ children, ...props }: any) {
 }
 
 function removePreTag(htmlString: string): string {
+  /**
+   * Detects if the code block contains a pre tag and would replace the class with shiki to ensure code highlight
+   * would function normally
+   */
   // Regular expression to find the pre tag and its content
   const preTagRegex = /<pre[^>]*>((.|\n|\r\n)*)<\/pre>/;
 

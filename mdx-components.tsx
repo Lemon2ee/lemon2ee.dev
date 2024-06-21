@@ -1,3 +1,4 @@
+// @ts-ignore
 import type { MDXComponents } from "mdx/types";
 import { Heading } from "@/app/components/mdx/Heading";
 import Paragraph from "@/app/components/mdx/Paragraph";
