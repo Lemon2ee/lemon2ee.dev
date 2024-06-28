@@ -48,7 +48,7 @@ export default async function Blog({
   const markdown = res.body;
   const combined = `${title}\n${markdown}`;
   return (
-    <article className={"prose pt-4 prose-custom dark:prose-invert"}>
+    <article className={"prose pt-4 max-w-full prose-custom dark:prose-invert"}>
       <MDXRemote source={combined} options={options} components={components} />
     </article>
   );
