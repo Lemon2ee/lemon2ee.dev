@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { humanReadableDate } from "@/lib/utils";
+import { humanReadableDate } from "@/utils/utils";
 import gitHubApiInstance, { BlogItem } from "@/utils/githubApi";
 
 export default async function Blog() {

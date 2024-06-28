@@ -1,5 +1,5 @@
 import { highlight } from "@/lib/shiki";
-import { isSingleLine } from "@/lib/utils";
+import { isSingleLine } from "@/utils/utils";
 import "./code.css";
 
 export async function Code({ children, ...props }: any) {
