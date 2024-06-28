@@ -1,16 +1,19 @@
 import Link from "next/link";
-import { fetchAllMetaData, sortBlogPostsByDate } from "@/lib/blogPostApi";
-import { MetaData } from "@/types/blog";
+import { humanReadableDate } from "@/lib/utils";
+import gitHubApiInstance, { BlogItem } from "@/utils/githubApi";
 
 export default async function Blog() {
-  const sortedBlogPosts: MetaData[] = sortBlogPostsByDate(fetchAllMetaData());
+  const blogsMetadata = await gitHubApiInstance.getAllGithubIssues();
+
   return (
     <div>
-      {sortedBlogPosts.map((post: MetaData) => (
-        <Link key={post.slug} href={`/blog/${post.slug}`}>
+      {blogsMetadata.map((post: BlogItem) => (
+        <Link key={post.title} href={`/blog/${post.slug}`}>
           <div className={"py-4"}>
             <h1 className={"text-base font-bold"}>{post.title}</h1>
-            <p className={"text-gray-500 text-sm py-1"}>{post.description}</p>
+            <p className={"text-gray-500 text-sm py-1"}>
+              {humanReadableDate(post.updated_at)}
+            </p>
           </div>
         </Link>
       ))}
