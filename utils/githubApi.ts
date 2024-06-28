@@ -30,8 +30,8 @@ class GitHubApi {
 
     const response = await fetch(url, {
       method: "GET",
-      cache: "no-store",
       headers: headerBody,
+      next: { revalidate: 1200 }
     });
 
     if (!response.ok) {
@@ -62,8 +62,8 @@ class GitHubApi {
 
     const response = await fetch(url, {
       method: "GET",
-      cache: "no-store",
       headers: headerBody,
+      next: { revalidate: 1200 }
     });
 
     if (!response.ok) {
