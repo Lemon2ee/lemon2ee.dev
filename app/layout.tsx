@@ -8,8 +8,8 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 export const metadata: Metadata = {
-  title: "Yizhou's land",
-  description: "Everything about Yizhou",
+  title: "Yizhou Wang",
+  description: "This is where I document things",
 };
 
 const cx = (...classes: string[]) => classes.filter(Boolean).join(" ");
