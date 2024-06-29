@@ -8,7 +8,8 @@ export interface BlogItem {
   created_at: string;
   updated_at: string;
   number: string;
-  slug: string; // Added slug field
+  slug: string;
+  body: string;
 }
 
 class GitHubApi {
@@ -50,7 +51,7 @@ class GitHubApi {
     return this.githubIssues;
   }
 
-  async fetchIssue(issueNum: string): Promise<any> {
+  async fetchIssue(issueNum: string): Promise<BlogItem> {
     const url = `https://api.github.com/repos/${
       process.env.GITHUB_USER || ""
     }/${process.env.GITHUB_REPO || ""}/issues/${issueNum}`;
@@ -70,7 +71,7 @@ class GitHubApi {
       throw new Error(`Error: ${response.status}`);
     }
 
-    return await response.json();
+    return this.filterSingleBlogItem(await response.json());
   }
 
   async fetchIssueBySlug(slug: string): Promise<any> {
@@ -81,25 +82,28 @@ class GitHubApi {
     return await this.fetchIssue(issue.number);
   }
 
-  private filterDataItems(data: any[]): BlogItem[] {
-    return data.map((item) => {
-      // Extract slug from tags
-      const slugTag = item.labels.find((label: any) =>
+  private filterSingleBlogItem(item: any): BlogItem {
+    // Extract slug from tags
+    const slugTag = item.labels.find((label: any) =>
         label.name.startsWith("slug:"),
-      );
-      const slug = slugTag ? slugTag.name.substring(5) : "";
+    );
+    const slug = slugTag ? slugTag.name.substring(5) : "";
 
-      return {
-        url: item.url,
-        id: item.id,
-        number: item.number,
-        title: item.title,
-        tag: item.labels ? item.labels.map((label: any) => label.name) : [],
-        created_at: item.created_at,
-        updated_at: item.updated_at,
-        slug: slug, // Set slug field
-      };
-    });
+    return {
+      url: item.url,
+      id: item.id,
+      number: item.number,
+      title: item.title,
+      tag: item.labels ? item.labels.map((label: any) => label.name) : [],
+      created_at: item.created_at,
+      updated_at: item.updated_at,
+      slug: slug,
+      body: item.body,
+    };
+  }
+
+  private filterDataItems(data: any[]): BlogItem[] {
+    return data.map(this.filterSingleBlogItem);
   }
 
   private sortBlogItemsByUpdatedAt(items: BlogItem[]): BlogItem[] {

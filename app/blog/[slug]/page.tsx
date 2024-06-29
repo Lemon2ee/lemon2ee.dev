@@ -11,7 +11,9 @@ import {
   CustomUnorderedList,
 } from "@/app/components/mdx/List";
 import { RoundedImage } from "@/app/components/mdx/Image";
-import gitHubApiInstance from "@/utils/githubApi";
+import gitHubApiInstance, {BlogItem} from "@/utils/githubApi";
+import CommentSection from "@/app/blog/[slug]/comments";
+import { Metadata, ResolvingMetadata } from 'next'
 
 const components: MDXComponents = {
   h1: Heading.H1,
@@ -27,6 +29,22 @@ const components: MDXComponents = {
   Image: RoundedImage,
 };
 
+type Props = {
+  params: { slug: string }
+}
+
+export async function generateMetadata(
+    { params }: Props,
+): Promise<Metadata> {
+  // read route params
+  const slug = params.slug
+  const blogContent = await gitHubApiInstance.fetchIssueBySlug(slug);
+
+  return {
+    title: blogContent.title,
+  }
+}
+
 export default async function Blog({
   params,
 }: {
@@ -34,9 +52,6 @@ export default async function Blog({
     slug: string;
   };
 }) {
-  const blogIssueNum = params.slug;
-  // const Blog = dynamic(() => import("@/_posts/" + blogPostName + ".mdx"));
-  const res = await gitHubApiInstance.fetchIssueBySlug(blogIssueNum);
   const options: MDXRemoteOptions = {
     mdxOptions: {
       // ...
@@ -44,12 +59,18 @@ export default async function Blog({
     parseFrontmatter: true,
   };
 
-  const title = `# ${res.title}`;
-  const markdown = res.body;
+  const slug = params.slug
+  const blogContent = await gitHubApiInstance.fetchIssueBySlug(slug);
+
+  const title = `# ${blogContent.title}`;
+  const markdown = blogContent.body;
   const combined = `${title}\n${markdown}`;
   return (
-    <article className={"prose pt-4 max-w-full prose-custom dark:prose-invert"}>
-      <MDXRemote source={combined} options={options} components={components} />
-    </article>
+      <>
+        <article className={"prose pt-4 max-w-full prose-custom dark:prose-invert"}>
+          <MDXRemote source={combined} options={options} components={components}/>
+        </article>
+        <CommentSection/>
+      </>
   );
 }
