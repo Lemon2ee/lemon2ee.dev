@@ -17,9 +17,6 @@ jobs:
         with:
           node-version: '14'  # Adjust as needed
 
-      - name: Install dependencies
-        run: npm install  # Or yarn install if using yarn
-
       - name: Run createDiscussion function
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
