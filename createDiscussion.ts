@@ -1,9 +1,9 @@
 async function createDiscussion() {
     // Read environment variables
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN as string;  // GitHub personal access token
-    const repositoryId = process.env.REPOSITORY_ID as string;  // Repository ID
-    const categoryId = process.env.CATEGORY_ID as string;  // Category ID (optional)
-    const issueTitle = process.env.ISSUE_TITLE as string;  // Issue title
+    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;  // GitHub personal access token
+    const repositoryId = process.env.REPOSITORY_ID;  // Repository ID
+    const categoryId = process.env.CATEGORY_ID;  // Category ID (optional)
+    const issueTitle = process.env.ISSUE_TITLE;  // Issue title
 
     // Validate that all required environment variables are set
     if (!GITHUB_TOKEN || !repositoryId || !issueTitle) {
