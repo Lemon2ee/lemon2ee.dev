@@ -1,0 +1,23 @@
+name: Create Discussion for Blog Issues
+on:
+  issues:
+    types: [opened]
+    tags:
+      - blog
+jobs:
+  create-discussion:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        
+      - name: Create Discussion
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          title=$(jq -r '.issue.title' $GITHUB_EVENT_PATH)
+          curl -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token $GITHUB_TOKEN" \
+            -d "{\"title\":\"$title\"}" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/discussions"
