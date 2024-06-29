@@ -16,11 +16,16 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '20'  # Adjust as needed
+      - name: Get global node ID
+        id: get-repo-id
+        uses: nvdaes/get-repository-id@v1
+        with:
+          repository: ${{ github.repository }}
 
       - name: Run createDiscussion function
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPOSITORY_ID: ${{ github.repository }}  # This is the repository ID
+          REPOSITORY_ID: ${{ steps.get-repo-id.outputs.repo-id }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           CATEGORY_ID: DIC_kwDOK8PX484Cgdqa
         run: node createDiscussion.ts  # Replace with the correct filename if different
