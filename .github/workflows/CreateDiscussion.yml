@@ -40,7 +40,7 @@ jobs:
             createDiscussion(input: {
               repositoryId: "'$REPOSITORY_ID'",
               categoryId: "'$CATEGORY_ID'",
-              body: "Discussion created based on issue: \"'$ISSUE_TITLE'\"",
+              body: "Discussion created based on issue: \\"'$ISSUE_TITLE'\\"",
               title: "'$ISSUE_TITLE'"
             }) {
               discussion {
@@ -61,5 +61,6 @@ jobs:
             -d "{\"query\": \"$mutation\"}" \
             https://api.github.com/graphql)
           
+          # Print response for debugging
           echo "Discussion creation response:"
           echo "$response"
