@@ -22,20 +22,25 @@ jobs:
       - name: Install dependencies
         run: npm install graphql request@^2.88.2
 
+      - name: Print ISSUE_TITLE
+        run: |
+          ISSUE_TITLE=$(jq -r '.issue.title' $GITHUB_EVENT_PATH)
+          echo "Issue Title: $ISSUE_TITLE"
+
       - name: Create Discussion
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           ISSUE_TITLE=$(jq -r '.issue.title' $GITHUB_EVENT_PATH)
           REPOSITORY_ID="R_kgDOK8PX4w"
-          CATEGORY_ID="<OPTIONAL_CATEGORY_ID>"
+          CATEGORY_ID="DIC_kwDOK8PX484Cgdqa"
           
-          # Construct GraphQL query
-          query='mutation {
+          # Construct GraphQL mutation
+          mutation='mutation {
             createDiscussion(input: {
               repositoryId: "'$REPOSITORY_ID'",
-              categoryId: "DIC_kwDOK8PX484Cgdqa",
-              body: "Discussion created based on issue: '$ISSUE_TITLE'",
+              categoryId: "'$CATEGORY_ID'",
+              body: "Discussion created based on issue: '\"$ISSUE_TITLE\"'",
               title: "'$ISSUE_TITLE'"
             }) {
               discussion {
@@ -44,12 +49,16 @@ jobs:
             }
           }'
           
-          # Send GraphQL request
+          # Print GraphQL request body for debugging
+          echo "GraphQL Request Body:"
+          echo "$mutation"
+          
+          # Send GraphQL request using curl
           response=$(curl -X POST \
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "$(echo "$query" | jq -c .)" \
+            -d "{\"query\": \"$mutation\"}" \
             https://api.github.com/graphql)
           
           echo "Discussion creation response:"
