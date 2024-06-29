@@ -58,8 +58,9 @@ jobs:
             -H "Accept: application/vnd.github.v3+json" \
             -H "Authorization: Bearer $GITHUB_TOKEN" \
             -H "Content-Type: application/json" \
-            -d "{\"query\": \"$mutation\"}" \
+            -d '{"query": "'"${mutation}"'"}' \
             https://api.github.com/graphql)
+
           
           # Print response for debugging
           echo "Discussion creation response:"
