@@ -35,12 +35,12 @@ jobs:
           REPOSITORY_ID="R_kgDOK8PX4w"
           CATEGORY_ID="DIC_kwDOK8PX484Cgdqa"
           
-          # Construct GraphQL mutation
+          # Construct GraphQL mutation with correct quotes
           mutation='mutation {
             createDiscussion(input: {
               repositoryId: "'$REPOSITORY_ID'",
               categoryId: "'$CATEGORY_ID'",
-              body: "Discussion created based on issue: '\"$ISSUE_TITLE\"'",
+              body: "Discussion created based on issue: \"'$ISSUE_TITLE'\"",
               title: "'$ISSUE_TITLE'"
             }) {
               discussion {
