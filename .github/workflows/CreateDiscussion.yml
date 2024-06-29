@@ -1,67 +1,29 @@
-name: Create Discussion for Blog Issues
+name: Create Discussion on New Issue
 
 on:
   issues:
     types: [opened]
-    tags:
-      - blog
 
 jobs:
-  create-discussion:
+  create_discussion:
     runs-on: ubuntu-latest
-
+    
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup Node.js
+      
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: '14'  # Adjust as needed
 
       - name: Install dependencies
-        run: npm install graphql request@^2.88.2
+        run: npm install  # Or yarn install if using yarn
 
-      - name: Print ISSUE_TITLE
-        run: |
-          ISSUE_TITLE=$(jq -r '.issue.title' $GITHUB_EVENT_PATH)
-          echo "Issue Title: $ISSUE_TITLE"
-
-      - name: Create Discussion
+      - name: Run createDiscussion function
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          ISSUE_TITLE=$(jq -r '.issue.title' $GITHUB_EVENT_PATH)
-          REPOSITORY_ID="R_kgDOK8PX4w"
-          CATEGORY_ID="DIC_kwDOK8PX484Cgdqa"
-          
-          # Construct GraphQL mutation with correct quotes
-          mutation='mutation {
-            createDiscussion(input: {
-              repositoryId: "'$REPOSITORY_ID'",
-              categoryId: "'$CATEGORY_ID'",
-              body: "Discussion created based on issue: \\"'$ISSUE_TITLE'\\"",
-              title: "'$ISSUE_TITLE'"
-            }) {
-              discussion {
-                id
-              }
-            }
-          }'
-          
-          # Print GraphQL request body for debugging
-          echo "GraphQL Request Body:"
-          echo "$mutation"
-          
-          # Send GraphQL request using curl
-          response=$(curl -X POST \
-            -H "Accept: application/vnd.github.v3+json" \
-            -H "Authorization: Bearer $GITHUB_TOKEN" \
-            -H "Content-Type: application/json" \
-            -d '{"query": "'"${mutation}"'"}' \
-            https://api.github.com/graphql)
-
-          
-          # Print response for debugging
-          echo "Discussion creation response:"
-          echo "$response"
+          REPOSITORY_ID: ${{ github.repository }}  # This is the repository ID
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          CATEGORY_ID: DIC_kwDOK8PX484Cgdqa
+        run: node createDiscussion.ts  # Replace with the correct filename if different
