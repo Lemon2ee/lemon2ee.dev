@@ -3,7 +3,7 @@ import { humanReadableDate } from "@/utils/utils";
 import gitHubApiInstance, { BlogItem } from "@/utils/githubApi";
 
 export default async function Blog() {
-  const blogsMetadata = await gitHubApiInstance.getAllGithubIssues();
+  const blogsMetadata = gitHubApiInstance.getGithubIssuesByCat("blog");
 
   return (
     <div>

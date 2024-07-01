@@ -46,7 +46,7 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams() {
-  const blogsMetadata: BlogItem[] = await gitHubApiInstance.getAllGithubIssues();
+  const blogsMetadata: BlogItem[] = gitHubApiInstance.getGithubIssuesByCat("blog");
   const slugList: {slug: string}[] = blogsMetadata.map(blog => ({ slug: blog.slug }));
 
   return slugList
