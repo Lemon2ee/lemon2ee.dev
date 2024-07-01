@@ -29,4 +29,5 @@ jobs:
           ISSUE_TITLE: ${{ github.event.issue.title }}
           CATEGORY_ID: DIC_kwDOK8PX484Cgdqa
           REVALIDATE_TOKEN: ${{ secrets.REVALIDATE_TOKEN }}
+          SITE_URL: ${{ vars.SITE_URL }}
         run: node createDiscussion.ts  # Replace with the correct filename if different
