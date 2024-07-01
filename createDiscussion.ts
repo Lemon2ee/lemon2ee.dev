@@ -5,6 +5,7 @@ async function createDiscussion() {
     const categoryId = process.env.CATEGORY_ID;  // Category ID (optional)
     const issueTitle = process.env.ISSUE_TITLE;  // Issue title
     const REVALIDATE_TOKEN = process.env.REVALIDATE_TOKEN;  // Token for middleware
+    const SITE_URL = process.env.SITE_URL;
 
     // Validate that all required environment variables are set
     if (!GITHUB_TOKEN || !repositoryId || !issueTitle || !REVALIDATE_TOKEN) {
@@ -47,7 +48,7 @@ async function createDiscussion() {
         console.log('Discussion creation response:', data);
 
         // Middleware endpoint
-        const middlewareUrl = '/api/revalidate';
+        const middlewareUrl = SITE_URL + '/api/revalidate';
 
         // Send POST request to middleware
         const revalidateResponse = await fetch(middlewareUrl, {
