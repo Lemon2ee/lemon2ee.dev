@@ -19,8 +19,6 @@ export function middleware(request: NextRequest) {
 
             // Verify the token
             if (token !== process.env.REVALIDATE_TOKEN) {
-                console.log(token)
-                console.log(process.env.REVALIDATE_TOKEN)
                 return NextResponse.json({ error: 'Invalid token' }, { status: 403 });
             }
 
