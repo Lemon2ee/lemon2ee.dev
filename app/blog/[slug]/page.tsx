@@ -11,9 +11,10 @@ import {
   CustomUnorderedList,
 } from "@/app/components/mdx/List";
 import { RoundedImage } from "@/app/components/mdx/Image";
-import gitHubApiInstance, {BlogItem} from "@/utils/githubApi";
+import {BlogItem} from "@/utils/githubApi";
 import CommentSection from "@/app/blog/[slug]/comments";
 import { Metadata } from 'next'
+import GitHubApi from "@/utils/githubApi";
 
 const components: MDXComponents = {
   h1: Heading.H1,
@@ -38,6 +39,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   // read route params
   const slug = params.slug
+  const gitHubApiInstance = await GitHubApi.getInstance();
   const blogContent = await gitHubApiInstance.fetchIssueBySlug(slug);
 
   return {
@@ -46,6 +48,7 @@ export async function generateMetadata(
 }
 
 export async function generateStaticParams() {
+  const gitHubApiInstance = await GitHubApi.getInstance();
   const blogsMetadata: BlogItem[] = gitHubApiInstance.getGithubIssuesByCat("blog");
   const slugList: {slug: string}[] = blogsMetadata.map(blog => ({ slug: blog.slug }));
 
@@ -67,6 +70,7 @@ export default async function Blog({
   };
 
   const slug = params.slug
+  const gitHubApiInstance = await GitHubApi.getInstance();
   const blogContent = await gitHubApiInstance.fetchIssueBySlug(slug);
 
   const title = `# ${blogContent.title}`;

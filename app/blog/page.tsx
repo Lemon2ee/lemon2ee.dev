@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { humanReadableDate } from "@/utils/utils";
-import gitHubApiInstance, { BlogItem } from "@/utils/githubApi";
+import { BlogItem } from "@/utils/githubApi";
+import GitHubApi from "@/utils/githubApi";
 
 export default async function Blog() {
+  const gitHubApiInstance = await GitHubApi.getInstance();
   const blogsMetadata = gitHubApiInstance.getGithubIssuesByCat("blog");
 
   return (

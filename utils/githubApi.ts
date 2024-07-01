@@ -13,17 +13,23 @@ export interface BlogItem {
 }
 
 class GitHubApi {
+  private static instance: GitHubApi;
   private githubIssues: BlogItem[];
 
-  constructor() {
+  private constructor() {
     this.githubIssues = [];
-    this.requestAllGithubIssues().then(r => this.githubIssues = r); // Initialize the data
   }
 
-  async requestAllGithubIssues(): Promise<BlogItem[]> {
-    const url = `https://api.github.com/repos/${
-        process.env.GITHUB_USER || ""
-    }/${process.env.GITHUB_REPO || ""}/issues`;
+  static async getInstance(): Promise<GitHubApi> {
+    if (!GitHubApi.instance) {
+      GitHubApi.instance = new GitHubApi();
+      await GitHubApi.instance.requestAllGithubIssues();
+    }
+    return GitHubApi.instance;
+  }
+
+  private async requestAllGithubIssues(): Promise<void> {
+    const url = `https://api.github.com/repos/${process.env.GITHUB_USER || ""}/${process.env.GITHUB_REPO || ""}/issues`;
     const headerBody = {
       Accept: "application/vnd.github+json",
       Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
@@ -41,11 +47,7 @@ class GitHubApi {
     }
 
     const resJson = await response.json();
-    const blogItems = this.sortBlogItemsByUpdatedAt(
-        this.filterDataItems(resJson),
-    );
-    this.githubIssues = blogItems; // Update githubIssues field
-    return blogItems;
+    this.githubIssues = this.sortBlogItemsByUpdatedAt(this.filterDataItems(resJson));
   }
 
   getAllGithubIssues(): BlogItem[] {
@@ -53,24 +55,19 @@ class GitHubApi {
   }
 
   getGithubIssuesByCat(category: string): BlogItem[] {
-    return this.githubIssues.filter(issue =>
-        issue.tag.some(tag => tag.startsWith(`cat:${category}`))
-    );
+    return this.githubIssues.filter(issue => issue.tag.some(tag => tag.startsWith(`cat:${category}`)));
   }
 
-  async fetchIssueBySlug(slug: string): Promise<any> {
-    const issue = this.githubIssues.find((issue) => issue.slug === slug);
+  async fetchIssueBySlug(slug: string): Promise<BlogItem> {
+    const issue = this.githubIssues.find(issue => issue.slug === slug);
     if (!issue) {
       throw new Error(`No issue found for slug: ${slug}`);
     }
-    return issue; // Return the issue directly from the stored githubIssues
+    return issue;
   }
 
   private filterSingleBlogItem(item: any): BlogItem {
-    // Extract slug from tags
-    const slugTag = item.labels.find((label: any) =>
-        label.name.startsWith("slug:"),
-    );
+    const slugTag = item.labels.find((label: any) => label.name.startsWith("slug:"));
     const slug = slugTag ? slugTag.name.substring(5) : "";
 
     return {
@@ -91,12 +88,8 @@ class GitHubApi {
   }
 
   private sortBlogItemsByUpdatedAt(items: BlogItem[]): BlogItem[] {
-    return items.sort(
-        (a, b) =>
-            new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime(),
-    );
+    return items.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
   }
 }
 
-const gitHubApiInstance = new GitHubApi();
-export default gitHubApiInstance;
+export default GitHubApi;
