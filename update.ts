@@ -4,12 +4,11 @@ async function update() {
     const repositoryId = process.env.REPOSITORY_ID;  // Repository ID
     const categoryId = process.env.CATEGORY_ID;  // Category ID (optional)
     const issueTitle = process.env.ISSUE_TITLE;  // Issue title
-    const REVALIDATE_TOKEN = process.env.REVALIDATE_TOKEN;  // Token for middleware
-    const SITE_URL = process.env.SITE_URL;
+    const VERCEL_REDEPLOY_HOOK = process.env.VERCEL_REDEPLOY_HOOK;
 
     // Validate that all required environment variables are set
-    if (!GITHUB_TOKEN || !repositoryId || !issueTitle || !REVALIDATE_TOKEN) {
-        throw new Error('Missing environment variables. Ensure GITHUB_TOKEN, REPOSITORY_ID, ISSUE_TITLE, and REVALIDATE_TOKEN are set.');
+    if (!GITHUB_TOKEN || !repositoryId || !issueTitle || !VERCEL_REDEPLOY_HOOK) {
+        throw new Error('Missing environment variables. Ensure GITHUB_TOKEN, REPOSITORY_ID, ISSUE_TITLE, and VERCEL_REDEPLOY_HOOK are set.');
     }
 
     // Construct GraphQL mutation
@@ -47,17 +46,13 @@ async function update() {
         const data = await response.json();
         console.log('Discussion creation response:', data);
 
-        // Middleware endpoint
-        const middlewareUrl = SITE_URL + '/api/revalidate';
-
-        // Send POST request to middleware
-        await fetch(middlewareUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ token: REVALIDATE_TOKEN })
+        const vercelResponse = await fetch(VERCEL_REDEPLOY_HOOK, {
+            method: 'POST'
         });
+
+        // Parse Vercel response
+        const vercelData = await vercelResponse.json();
+        console.log('Vercel redeploy hook response:', vercelData);
 
     } catch (error) {
         console.error('Error creating discussion or revalidating:', error);
