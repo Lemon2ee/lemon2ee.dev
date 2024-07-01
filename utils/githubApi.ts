@@ -32,7 +32,7 @@ class GitHubApi {
     const response = await fetch(url, {
       method: "GET",
       headers: headerBody,
-      next: { revalidate: 1200 }
+      next: { revalidate: false }
     });
 
     if (!response.ok) {
@@ -64,7 +64,7 @@ class GitHubApi {
     const response = await fetch(url, {
       method: "GET",
       headers: headerBody,
-      next: { revalidate: 1200 }
+      next: { revalidate: false }
     });
 
     if (!response.ok) {
