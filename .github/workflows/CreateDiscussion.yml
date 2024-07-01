@@ -28,4 +28,5 @@ jobs:
           REPOSITORY_ID: ${{ steps.get-repo-id.outputs.repo-id }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           CATEGORY_ID: DIC_kwDOK8PX484Cgdqa
+          REVALIDATE_TOKEN: ${{ secrets.REVALIDATE_TOKEN }}
         run: node createDiscussion.ts  # Replace with the correct filename if different
