@@ -22,7 +22,7 @@ jobs:
         with:
           repository: ${{ github.repository }}
 
-      - name: Run createDiscussion function
+      - name: Run update function
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY_ID: ${{ steps.get-repo-id.outputs.repo-id }}
@@ -30,4 +30,4 @@ jobs:
           CATEGORY_ID: DIC_kwDOK8PX484Cgdqa
           REVALIDATE_TOKEN: ${{ secrets.REVALIDATE_TOKEN }}
           SITE_URL: ${{ vars.SITE_URL }}
-        run: node createDiscussion.ts  # Replace with the correct filename if different
+        run: node update.ts  # Replace with the correct filename if different

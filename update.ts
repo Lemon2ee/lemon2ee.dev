@@ -1,4 +1,4 @@
-async function createDiscussion() {
+async function update() {
     // Read environment variables
     const GITHUB_TOKEN = process.env.GITHUB_TOKEN;  // GitHub personal access token
     const repositoryId = process.env.REPOSITORY_ID;  // Repository ID
@@ -51,7 +51,7 @@ async function createDiscussion() {
         const middlewareUrl = SITE_URL + '/api/revalidate';
 
         // Send POST request to middleware
-        const revalidateResponse = await fetch(middlewareUrl, {
+        await fetch(middlewareUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -59,14 +59,10 @@ async function createDiscussion() {
             body: JSON.stringify({ token: REVALIDATE_TOKEN })
         });
 
-        // Parse middleware response
-        const revalidateData = await revalidateResponse.json();
-        console.log('Middleware response:', revalidateData);
-
     } catch (error) {
         console.error('Error creating discussion or revalidating:', error);
     }
 }
 
 // Call function to create discussion
-createDiscussion();
+update();
