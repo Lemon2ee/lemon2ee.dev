@@ -13,7 +13,7 @@ import {
 import { RoundedImage } from "@/app/components/mdx/Image";
 import gitHubApiInstance, {BlogItem} from "@/utils/githubApi";
 import CommentSection from "@/app/blog/[slug]/comments";
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 
 const components: MDXComponents = {
   h1: Heading.H1,
@@ -43,6 +43,13 @@ export async function generateMetadata(
   return {
     title: blogContent.title,
   }
+}
+
+export async function generateStaticParams() {
+  const blogsMetadata: BlogItem[] = await gitHubApiInstance.getAllGithubIssues();
+  const slugList: {slug: string}[] = blogsMetadata.map(blog => ({ slug: blog.slug }));
+
+  return slugList
 }
 
 export default async function Blog({
