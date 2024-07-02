@@ -31,17 +31,21 @@ export function ReviewCard({
             />
           </div>
             <div className="p-8">
-                <div className={`uppercase tracking-wide text-xl ${title_color} font-semibold`}>
+                <div className={`uppercase tracking-wide text-xl font-semibold`}
+                     style={{textDecorationColor: title_color }}
+                >
                     {title}
                 </div>
                 <div className="row-span-1 flex items-center w-3/5 py-4">
             <span className="text-sm font-medium text-gray-400">
               {roundedRating}
             </span>
-                    <div className={`w-full ${bar_bg_color} rounded h-2.5 ms-2`}>
+                    <div className={`w-full rounded h-2.5 ms-2`}
+                         style={{backgroundColor: bar_bg_color }}
+                    >
                         <div
-                            className={`${bar_color} h-2.5 rounded`}
-                            style={{width: widthPercentage}}
+                            className={`h-2.5 rounded`}
+                            style={{ width: widthPercentage, backgroundColor: bar_color }}
                         ></div>
                     </div>
                 </div>
