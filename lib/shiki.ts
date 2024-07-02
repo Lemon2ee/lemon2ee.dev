@@ -1,19 +1,8 @@
-import type { Highlighter } from "shikiji";
-import { bundledLanguages, getHighlighter } from "shikiji";
+import { codeToHtml } from 'shiki'
 
-let highlighter: Highlighter;
 
 export async function highlight(code: string, lang: string) {
-  if (!highlighter) {
-    console.log("Initializing highlighter")
-    highlighter = await getHighlighter({
-      langs: Object.keys(bundledLanguages),
-      themes: ["dracula", "solarized-light"],
-    });
-  }
-
-  console.log("Starting to highlight code")
-  return highlighter.codeToHtml(code, {
+  return codeToHtml(code, {
     lang: lang,
     themes: {
       light: "solarized-light",

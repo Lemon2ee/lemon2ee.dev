@@ -5,9 +5,7 @@ import "./code.css";
 export async function Code({ children, ...props }: any) {
   const propsClassName = props["className"] || "language-md";
   const language = propsClassName.split("language-")[1];
-  console.log("Requesting code highlight for language: ", language);
   let html = await highlight(children, language);
-  console.log("Code highlight completed for language: ", language);
   if (isSingleLine(children)) {
     html = removePreTag(html);
   }
