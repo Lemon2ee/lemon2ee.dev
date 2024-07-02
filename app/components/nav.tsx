@@ -13,6 +13,9 @@ const navItems = {
   "/music": {
     name: "playlists",
   },
+  "/game-review": {
+    name: "game-reviews",
+  },
 };
 
 export function Navbar() {

@@ -1,6 +1,6 @@
 // src/utils/GitHubApi.ts
 
-export interface BlogItem {
+export interface IssueItem {
   url: string;
   id: string;
   title: string;
@@ -14,7 +14,7 @@ export interface BlogItem {
 
 class GitHubApi {
   private static instance: GitHubApi;
-  private githubIssues: BlogItem[];
+  private githubIssues: IssueItem[];
 
   private constructor() {
     this.githubIssues = [];
@@ -50,15 +50,15 @@ class GitHubApi {
     this.githubIssues = this.sortBlogItemsByUpdatedAt(this.filterDataItems(resJson));
   }
 
-  getAllGithubIssues(): BlogItem[] {
+  getAllGithubIssues(): IssueItem[] {
     return this.githubIssues;
   }
 
-  getGithubIssuesByCat(category: string): BlogItem[] {
+  getGithubIssuesByCat(category: string): IssueItem[] {
     return this.githubIssues.filter(issue => issue.tag.some(tag => tag.startsWith(`cat:${category}`)));
   }
 
-  async fetchIssueBySlug(slug: string): Promise<BlogItem> {
+  async fetchIssueBySlug(slug: string): Promise<IssueItem> {
     const issue = this.githubIssues.find(issue => issue.slug === slug);
     if (!issue) {
       throw new Error(`No issue found for slug: ${slug}`);
@@ -66,7 +66,7 @@ class GitHubApi {
     return issue;
   }
 
-  private filterSingleBlogItem(item: any): BlogItem {
+  private filterSingleBlogItem(item: any): IssueItem {
     const slugTag = item.labels.find((label: any) => label.name.startsWith("slug:"));
     const slug = slugTag ? slugTag.name.substring(5) : "";
 
@@ -83,11 +83,11 @@ class GitHubApi {
     };
   }
 
-  private filterDataItems(data: any[]): BlogItem[] {
+  private filterDataItems(data: any[]): IssueItem[] {
     return data.map(this.filterSingleBlogItem);
   }
 
-  private sortBlogItemsByUpdatedAt(items: BlogItem[]): BlogItem[] {
+  private sortBlogItemsByUpdatedAt(items: IssueItem[]): IssueItem[] {
     return items.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
   }
 }

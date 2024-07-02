@@ -11,7 +11,7 @@ import {
   CustomUnorderedList,
 } from "@/app/components/mdx/List";
 import { RoundedImage } from "@/app/components/mdx/Image";
-import {BlogItem} from "@/utils/githubApi";
+import {IssueItem} from "@/utils/githubApi";
 import CommentSection from "@/app/blog/[slug]/comments";
 import { Metadata } from 'next'
 import GitHubApi from "@/utils/githubApi";
@@ -49,7 +49,7 @@ export async function generateMetadata(
 
 export async function generateStaticParams() {
   const gitHubApiInstance = await GitHubApi.getInstance();
-  const blogsMetadata: BlogItem[] = gitHubApiInstance.getGithubIssuesByCat("blog");
+  const blogsMetadata: IssueItem[] = gitHubApiInstance.getGithubIssuesByCat("blog");
   const slugList: {slug: string}[] = blogsMetadata.map(blog => ({ slug: blog.slug }));
 
   return slugList
