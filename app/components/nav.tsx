@@ -10,6 +10,9 @@ const navItems = {
   "/blog": {
     name: "blog",
   },
+  "/music": {
+    name: "playlists",
+  },
 };
 
 export function Navbar() {
