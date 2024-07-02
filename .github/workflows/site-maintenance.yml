@@ -2,10 +2,10 @@ name: Create Discussion on New Issue
 
 on:
   issues:
-    types: [opened]
+    types: [opened, deleted]
 
 jobs:
-  create_discussion:
+  handle_issue:
     runs-on: ubuntu-latest
     
     steps:
@@ -26,11 +26,16 @@ jobs:
         with:
           repository: ${{ github.repository }}
 
-      - name: Run maintenance script
+      - name: Handle issue event
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPOSITORY_ID: ${{ steps.get-repo-id.outputs.repo-id }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           CATEGORY_ID: DIC_kwDOK8PX484Cgdqa
           VERCEL_REDEPLOY_HOOK: ${{ secrets.VERCEL_REDEPLOY_HOOK }}
-        run: python maintenance.py
+        run: |
+          if [ "${{ github.event.action }}" == "opened" ]; then
+            python maintenance.py --add
+          elif [ "${{ github.event.action }}" == "deleted" ]; then
+            python maintenance.py --delete
+          fi
