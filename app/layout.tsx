@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
       <body
-        className={"px-5 py-8 lg:py-20 mx-auto max-w-3xl subpixel-antialiased"}
+        className={"px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased"}
       >
         <Navbar />
         {children}

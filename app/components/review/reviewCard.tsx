@@ -15,11 +15,11 @@ export function ReviewCard({
   const widthPercentage = `${rating * 10}%`;
 
   return (
-      <div className="max-w-md mx-auto border-neutral-700 bg-neutral-800 rounded-xl shadow-md overflow-hidden">
+      <div className="max-w-2xl mx-auto border-neutral-700 bg-neutral-800 rounded-xl shadow-md overflow-hidden">
         <div>
           <div>
             <img
-                className="h-48 w-full object-cover"
+                className="h-52 w-full object-cover"
                 src={imageUrl}
                 alt="Modern building architecture"
             />
