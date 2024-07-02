@@ -8,7 +8,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 export const metadata: Metadata = {
-  title: "Yizhou Wang",
+  title: "Lemon2ee",
 };
 
 const cx = (...classes: string[]) => classes.filter(Boolean).join(" ");
