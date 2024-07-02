@@ -3,7 +3,6 @@ export function ReviewCard({
                                content,
                                imageUrl,
                                rating,
-                               title_color,
                                bar_bg_color,
                                bar_color,
                            }: {
@@ -11,7 +10,6 @@ export function ReviewCard({
     content: string;
     imageUrl: string;
     rating: number;
-    title_color: string;
     bar_bg_color: string;
     bar_color: string;
 }) {
@@ -31,9 +29,7 @@ export function ReviewCard({
             />
           </div>
             <div className="p-8">
-                <div className={`uppercase tracking-wide text-xl font-semibold`}
-                     style={{textDecorationColor: title_color }}
-                >
+                <div className={`uppercase tracking-wide text-xl font-semibold`}>
                     {title}
                 </div>
                 <div className="row-span-1 flex items-center w-3/5 py-4">
