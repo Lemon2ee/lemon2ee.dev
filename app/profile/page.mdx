@@ -1,3 +1,5 @@
+export const linebreak = <hr className="my-6 border-neutral-100 dark:border-neutral-800"></hr>
+
 <h1 className={"text-2xl font-medium"}>Education</h1>
 
 
@@ -8,7 +10,7 @@ Bachelor of Science in Computer Science<br/>
 *Sept. 2020 - May 2024*<br/>
 GPA: 3.88/4.0<br/>
 
-<hr className="my-6 border-neutral-100 dark:border-neutral-800"></hr>
+{linebreak}
 
 <h1 className={"text-2xl font-normal"}>Work</h1>
 
@@ -18,24 +20,44 @@ GPA: 3.88/4.0<br/>
 *Jul. 2022 - Dec. 2022*<br/>
 Software Engineer Co-Op, Resilience Operations Center<br/>
 
-<hr className="my-6 border-neutral-100 dark:border-neutral-800"></hr>
+{linebreak}
 
 <h1 className={"text-2xl font-normal"}>Projects</h1>
 
 <div className={"pt-2"}/>
 
-<a href={"https://github.com/csccsid/CY4740_Project"} className={"text-xl underline break-all"}>Instant Messaging
-    App</a> (Python)<br/>
+<a href={"https://lemon2ee.dev/"} className={"text-xl underline break-all"}>lemon2ee.dev</a> (Typescript, Next.js, React)<br/>
+*Oct. 2023 - Present*<br/>
+
+This portfolio website showcases my intro, profile (education, work experience, projects), and a tech-focused blog section. A review section for books, movies, and games is planned.<br/>
+
+Implemented with Next.js, utilizing Static-Site-Generation (SSG) for fast loading times and SEO optimization. GitHub Issues serves as a CMS, providing a seamless editing interface, easy image embedding, and a built-in label system for efficient blog post categorization, while eliminating the need for a traditional database.<br/>
+
+GitHub Actions automate website updates when issues are created/deleted, streamlining content management.<br/>
+{linebreak}
+<a href={"https://github.com/csccsid/CY4740_Project"} className={"text-xl underline break-all"}>Instant Messaging App</a> (Python)<br/>
 *Apr. 2024*<br/>
-Chat client and server impleneted with mutual authentication, provides perfect forward secrecy, hiding-from-server, integrity and confidentiality for all communications.<br/>
 
-<a href={"https://github.com/Lemon2ee/bluedit"} className={"text-xl underline break-all"}>Bluedit</a> (Typescript, Next.
-    js, React, MongoDB, Prisma)<br/>
+Chat client and server implemented with mutual authentication, providing perfect forward secrecy, hiding-from-server, integrity, and confidentiality for all communications. Implements Argon2id for password hashing, AES-GCM-256 for message encryption, and uses Diffie-Hellman key exchange and Otway-Rees protocol for key establishment.<br/>
+
+Leverages Python's asyncio for efficient handling of multiple concurrent connections.<br/>
+
+Developed as part of coursework to gain practical experience in network security.<br/>
+{linebreak}
+<a href={"https://github.com/Lemon2ee/bluedit"} className={"text-xl underline break-all"}>Bluedit</a> (Typescript, Next.js, React, MongoDB, Prisma)<br/>
 *Nov. 2023 - Dec. 2023*<br/>
-An online post-based forum developed with Next.js and maximizing its server-side rendering capabilities.<br/>
 
-<span className={"text-xl"}>File system</span> (C/LibFUSE)<br/>
+An online post-based forum developed with Next.js, maximizing its server-side rendering capabilities. Implements core Reddit-like features including user posts, comments, following, and post liking.<br/>
+
+Served as a practical exercise in web development, focusing on mastering Next.js app router and server/client-side rendering concepts.<br/>
+
+As Team Lead, coordinated team members and liaised with stakeholders.<br/>
+{linebreak}
+<span className={"text-xl"}>File system</span> (C, LibFUSE)<br/>
 *Dec. 2023*<br/>
-A FUSE filesystem driver that allow users to mount a 1MB disk image with support for all standard file/dir commands,
-using a single indirect pointer.
-<br/>
+
+A FUSE filesystem driver that allows users to mount a 1MB disk image with support for all standard file/dir operations including file creation, listing, renaming, deletion, and editing.<br/>
+
+Utilizes a single indirect pointer system, allowing for efficient file access and management within the 1MB disk image constraint.<br/>
+
+Developed as an individual project to gain hands-on experience with low-level file system operations and FUSE implementation.<br/>
