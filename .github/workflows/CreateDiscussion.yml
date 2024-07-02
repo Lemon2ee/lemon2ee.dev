@@ -17,6 +17,9 @@ jobs:
         with:
           python-version: '3.x'  # Adjust as needed
 
+      - name: Install dependencies
+        run: pip install requests json os
+
       - name: Run inline Python code
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
