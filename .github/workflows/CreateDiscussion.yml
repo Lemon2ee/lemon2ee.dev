@@ -20,6 +20,12 @@ jobs:
       - name: Install dependencies
         run: pip install requests
 
+      - name: Get global node ID
+        id: get-repo-id
+        uses: nvdaes/get-repository-id@v1
+        with:
+          repository: ${{ github.repository }}
+
       - name: Run maintenance script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
