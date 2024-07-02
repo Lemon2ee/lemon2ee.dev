@@ -1,20 +1,18 @@
 import os
 import requests
 import json
+import argparse
 
-def update():
+def create_discussion():
     # Read environment variables
     GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
     repository_id = os.getenv('REPOSITORY_ID')
     category_id = os.getenv('CATEGORY_ID')
     issue_title = os.getenv('ISSUE_TITLE')
-    VERCEL_REDEPLOY_HOOK = os.getenv('VERCEL_REDEPLOY_HOOK')
 
-    # Validate that all required environment variables are set
-    if not GITHUB_TOKEN or not repository_id or not issue_title or not VERCEL_REDEPLOY_HOOK:
-        raise ValueError('Missing environment variables. Ensure GITHUB_TOKEN, REPOSITORY_ID, ISSUE_TITLE, and VERCEL_REDEPLOY_HOOK are set.')
+    if not GITHUB_TOKEN or not repository_id or not issue_title:
+        raise ValueError('Missing environment variables. Ensure GITHUB_TOKEN, REPOSITORY_ID, and ISSUE_TITLE are set.')
 
-    # Construct GraphQL mutation
     mutation = f'''
         mutation {{
             createDiscussion(input: {{
@@ -30,28 +28,52 @@ def update():
         }}
     '''
 
-    # GraphQL endpoint
     graphql_url = 'https://api.github.com/graphql'
 
     try:
-        # Send GraphQL request
         response = requests.post(graphql_url, headers={
             'Authorization': f'Bearer {GITHUB_TOKEN}',
             'Content-Type': 'application/json',
             'Accept': 'application/vnd.github.v3+json'
         }, data=json.dumps({'query': mutation}))
 
-        # Parse response
         data = response.json()
         print('Discussion creation response:', data)
 
+    except Exception as error:
+        print('Error creating discussion:', error)
+
+def trigger_vercel_deploy():
+    VERCEL_REDEPLOY_HOOK = os.getenv('VERCEL_REDEPLOY_HOOK')
+
+    if not VERCEL_REDEPLOY_HOOK:
+        raise ValueError('Missing environment variable: VERCEL_REDEPLOY_HOOK')
+
+    try:
         vercel_response = requests.post(VERCEL_REDEPLOY_HOOK)
-        # Parse Vercel response
         vercel_data = vercel_response.json()
         print('Vercel redeploy hook response:', vercel_data)
 
     except Exception as error:
-        print('Error creating discussion or revalidating:', error)
+        print('Error triggering Vercel redeploy:', error)
 
-# Call function to create discussion
-update()
+def handle_add():
+    create_discussion()
+    trigger_vercel_deploy()
+
+def handle_delete():
+    print("Handling delete operation. Logic to be implemented.")
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description='Maintenance script to handle GitHub issues.')
+    parser.add_argument('--add', action='store_true', help='Handle addition of a new issue.')
+    parser.add_argument('--delete', action='store_true', help='Handle deletion of an issue.')
+
+    args = parser.parse_args()
+
+    if args.add:
+        handle_add()
+    elif args.delete:
+        handle_delete()
+    else:
+        print("Please specify an action: --add or --delete")
