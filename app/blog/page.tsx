@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { humanReadableDate } from "@/utils/utils";
-import { BlogItem } from "@/utils/githubApi";
+import { IssueItem } from "@/utils/githubApi";
 import GitHubApi from "@/utils/githubApi";
 
 export default async function Blog() {
@@ -9,7 +9,7 @@ export default async function Blog() {
 
   return (
     <div>
-      {blogsMetadata.map((post: BlogItem) => (
+      {blogsMetadata.map((post: IssueItem) => (
         <Link key={post.title} href={`/blog/${post.slug}`}>
           <div className={"py-4"}>
             <h1 className={"text-base font-bold"}>{post.title}</h1>

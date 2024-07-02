@@ -1,19 +1,47 @@
-function ReviewCard({ slug, name }: { slug: string; name: string }) {
-    return (
-        <div className="group">
-            <a
-                href={`/blog/${slug}`}
-                className="flex w-full items-center justify-between rounded border border-neutral-200 bg-neutral-50 px-3 py-4 dark:border-neutral-700 dark:bg-neutral-800"
-            >
-                <div className="flex flex-col">
-                    <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                        {name}
-                    </p>
-                </div>
-                <div className="transform text-neutral-700 transition-transform duration-300 group-hover:-rotate-12 dark:text-neutral-300">
-                    r
-                </div>
-            </a>
+export function ReviewCard({
+  title,
+  content,
+  imageUrl,
+  rating,
+}: {
+  title: string;
+  content: string;
+  imageUrl: string;
+  rating: number;
+}) {
+  // Round the rating to one decimal place
+  const roundedRating = Math.round(rating * 10) / 10;
+  // Calculate the width percentage
+  const widthPercentage = `${rating * 10}%`;
+
+  return (
+    <div className="max-w-md mx-auto border-neutral-700 bg-neutral-800 rounded-xl shadow-md overflow-hidden md:max-w-2xl">
+      <div className="md:flex">
+        <div className="md:shrink-0">
+          <img
+            className="h-48 w-full object-cover md:h-full md:w-48"
+            src={imageUrl}
+            alt="Modern building architecture"
+          />
         </div>
-    );
+        <div className="p-8">
+          <div className="uppercase tracking-wide text-xl text-indigo-500 font-semibold">
+            {title}
+          </div>
+          <div className="row-span-1 flex items-center w-3/5 py-4">
+            <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
+              {roundedRating}
+            </span>
+            <div className="w-full bg-gray-200 rounded h-2.5 dark:bg-gray-700 ms-2">
+              <div
+                className="bg-blue-600 h-2.5 rounded dark:bg-blue-500"
+                style={{ width: widthPercentage }}
+              ></div>
+            </div>
+          </div>
+          <p className="text-neutral-100">{content}</p>
+        </div>
+      </div>
+    </div>
+  );
 }
