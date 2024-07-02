@@ -117,6 +117,7 @@ def handle_add():
 
 def handle_delete():
     delete_discussion()
+    trigger_vercel_deploy()
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Maintenance script to handle GitHub issues.')
