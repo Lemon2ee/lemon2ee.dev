@@ -1,4 +1,9 @@
 import {ArrowIcon} from "./components/writing/Icons"
+export const socialLinks = [
+    { href: "https://github.com/Lemon2ee", label: "Github" },
+    { href: "https://steamcommunity.com/id/673514382", label: "Steam" },
+    { href: "https://space.bilibili.com/21844932", label: "BiliBili" },
+]
 
 # hi there 👋
 
@@ -6,43 +11,28 @@ id = Lemon2ee，我是一名程序员、[游戏玩家](https://lemon2ee.dev/game
 
 说来可惜，直到高三才拥有了属于自己的电脑(一台2011年的11“ Macbook Air)，这才有机会去探索软件开发的世界。当时为了突破网络限制，开始接触到一些不可言传的服务，Linux、GitHub、一点点编程和自托管服务。对于这些工具背后运行逻辑的好奇最终引导我在大学申请时选择了计算机科学专业，并且希望能够运用学到的技术开发能够帮助到别人的程序，比如Trojan，[Proteus](https://github.com/unblockable/proteus)。
 
+Dark mode cultist，所以该网站没有，也不需要Light mode support.
+
 ### 关于本站
 
 正如我在["First Blog Post"](https://lemon2ee.dev/blog/first-blog-post)中提到的，我曾多次尝试搭建个人博客。先后使用过 Hexo、Ghost，甚至 Outline，但都因各种原因中途放弃。如今这个网站，是我在深入了解自身需求后，从 `npx create-next-app@latest` 开始亲手打造的。
 
 有时翻阅过往的碎片，常常会惊讶于自己曾经尝试过的事情。比如，偶然发现 6 年前的一条微信，或是 4 年前用 Google Site "创建"的第一个网站，都让我感慨万分。因此，我希望能够把自己的经历集中的记录下来，以供未来的我更加方便的翻阅，同时也希望部分文章能够帮助到一些人
 
-Dark mode cultist，所以该网站没有，也不需要Light mode support.
 
 ### links
 
-<div
-    className="font-sm flex flex-col space-x-0 space-y-2 text-neutral-600 md:flex-row md:space-x-4 md:space-y-0 dark:text-neutral-300">
-    <a
-        className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100 no-underline"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://github.com/Lemon2ee"
-    >
-        <ArrowIcon/>
-        <p className="ml-2 h-7">Github</p>
-    </a>
-    <a
-        className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100 no-underline"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://steamcommunity.com/id/673514382"
-    >
-        <ArrowIcon/>
-        <p className="ml-2 h-7">Steam</p>
-    </a>
-    <a
-        className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100 no-underline"
-        rel="noopener noreferrer"
-        target="_blank"
-        href="https://space.bilibili.com/21844932"
-    >
-        <ArrowIcon/>
-        <p className="ml-2 h-7">BiliBili</p>
-    </a>
+<div className="flex flex-col text-neutral-600 md:flex-row md:space-x-4 dark:text-neutral-300 space-y-2 md:space-y-0">
+    {socialLinks.map(({ href, label }) => (
+        <a
+            key={href}
+            className="flex items-center transition-all hover:text-neutral-800 dark:hover:text-neutral-100 no-underline"
+            rel="noopener noreferrer"
+            target="_blank"
+            href={href}
+        >
+            <ArrowIcon />
+            <div className="ml-2 h-7">{label}</div>
+        </a>
+    ))}
 </div>
