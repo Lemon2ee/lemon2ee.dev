@@ -1,4 +1,4 @@
-import { JSX, ClassAttributes, AnchorHTMLAttributes } from "react";
+import { AnchorHTMLAttributes, ClassAttributes, JSX } from "react";
 
 function Badge(
   props: JSX.IntrinsicAttributes &

@@ -11,10 +11,9 @@ import {
   CustomUnorderedList,
 } from "@/app/components/mdx/List";
 import { RoundedImage } from "@/app/components/mdx/Image";
-import {IssueItem} from "@/utils/githubApi";
-import CommentSection from "@/app/blog/[slug]/comments";
-import { Metadata } from 'next'
-import GitHubApi from "@/utils/githubApi";
+import GitHubApi, { IssueItem } from "@/utils/githubApi";
+import CommentSection from "@/app/components/comment/giscus";
+import { Metadata } from "next";
 
 const components: MDXComponents = {
   h1: Heading.H1,
@@ -31,28 +30,29 @@ const components: MDXComponents = {
 };
 
 type Props = {
-  params: { slug: string }
-}
+  params: { slug: string };
+};
 
-export async function generateMetadata(
-    { params }: Props,
-): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   // read route params
-  const slug = params.slug
+  const slug = params.slug;
   const gitHubApiInstance = await GitHubApi.getInstance();
   const blogContent = await gitHubApiInstance.fetchIssueBySlug(slug);
 
   return {
     title: blogContent.title,
-  }
+  };
 }
 
 export async function generateStaticParams() {
   const gitHubApiInstance = await GitHubApi.getInstance();
-  const blogsMetadata: IssueItem[] = gitHubApiInstance.getGithubIssuesByCat("blog");
-  const slugList: {slug: string}[] = blogsMetadata.map(blog => ({ slug: blog.slug }));
+  const blogsMetadata: IssueItem[] =
+    gitHubApiInstance.getGithubIssuesByCat("blog");
+  const slugList: { slug: string }[] = blogsMetadata.map((blog) => ({
+    slug: blog.slug,
+  }));
 
-  return slugList
+  return slugList;
 }
 
 export default async function Blog({
@@ -69,7 +69,7 @@ export default async function Blog({
     parseFrontmatter: true,
   };
 
-  const slug = params.slug
+  const slug = params.slug;
   const gitHubApiInstance = await GitHubApi.getInstance();
   const blogContent = await gitHubApiInstance.fetchIssueBySlug(slug);
 
@@ -77,11 +77,17 @@ export default async function Blog({
   const markdown = blogContent.body;
   const combined = `${title}\n${markdown}`;
   return (
-      <>
-        <article className={"prose pt-4 max-w-full prose-custom dark:prose-invert"}>
-          <MDXRemote source={combined} options={options} components={components}/>
-        </article>
-        <CommentSection/>
-      </>
+    <>
+      <article
+        className={"prose pt-4 max-w-full prose-custom dark:prose-invert"}
+      >
+        <MDXRemote
+          source={combined}
+          options={options}
+          components={components}
+        />
+      </article>
+      <CommentSection />
+    </>
   );
 }

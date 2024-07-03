@@ -8,7 +8,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ["shiki", "vscode-oniguruma"],
   },
   images: {
-    domains: ["raw.githubusercontent.com", "flowbite.s3.amazonaws.com"],
+    domains: ["raw.githubusercontent.com", "flowbite.s3.amazonaws.com", "github.com"],
   },
   // Optionally, add any other Next.js config below
 };

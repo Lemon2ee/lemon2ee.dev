@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { humanReadableDate } from "@/utils/utils";
-import { IssueItem } from "@/utils/githubApi";
-import GitHubApi from "@/utils/githubApi";
+import GitHubApi, { IssueItem } from "@/utils/githubApi";
 
 export default async function Blog() {
   const gitHubApiInstance = await GitHubApi.getInstance();
