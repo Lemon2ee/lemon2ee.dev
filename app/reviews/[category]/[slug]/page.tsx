@@ -1,6 +1,6 @@
 import { ReviewCard } from "@/app/components/review/reviewCard";
 import GitHubApi, { IssueItem } from "@/utils/githubApi";
-import { parseReviewBody } from "@/utils/utils";
+import { filterReviewByContentType, parseReviewBody } from "@/utils/utils";
 import CommentSection from "@/app/components/comment/giscus";
 import { Metadata } from "next";
 
@@ -22,11 +22,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
+export async function generateStaticParams({
+  params: { category },
+}: {
+  params: { category: string };
+}) {
   const gitHubApiInstance = await GitHubApi.getInstance();
   const blogsMetadata: IssueItem[] =
     gitHubApiInstance.getGithubIssuesByCat("reviews");
-  const slugList: { slug: string }[] = blogsMetadata.map((blog) => ({
+  const filteredReviews = filterReviewByContentType(blogsMetadata, category);
+  const slugList: { slug: string }[] = filteredReviews.map((blog) => ({
     slug: blog.slug,
   }));
 
