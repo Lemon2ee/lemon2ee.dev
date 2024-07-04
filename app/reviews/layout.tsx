@@ -1,7 +1,7 @@
 import React from "react";
-import {Navbar} from "@/app/components/nav";
+import { Navbar } from "@/app/components/nav";
 
-const navItems = {
+const navItems: { [key: string]: { name: string } } = {
   "/reviews/game": {
     name: "game",
   },
@@ -12,6 +12,12 @@ const navItems = {
     name: "movie",
   },
 };
+
+export async function generateStaticParams() {
+  return Object.keys(navItems).map((key: string) => ({
+    category: navItems[key].name,
+  }));
+}
 
 export default function ReviewsLayout({
   children, // will be a page or nested layout
