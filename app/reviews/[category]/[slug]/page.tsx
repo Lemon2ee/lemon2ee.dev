@@ -1,6 +1,6 @@
 import { ReviewCard } from "@/app/components/review/reviewCard";
 import GitHubApi, { IssueItem } from "@/utils/githubApi";
-import { filterReviewByContentType, parseReviewBody } from "@/utils/utils";
+import {extractTagDetails, parseReviewBody} from "@/utils/utils";
 import CommentSection from "@/app/components/comment/giscus";
 import { Metadata } from "next";
 
@@ -22,23 +22,20 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams({
-  params: { category },
-}: {
-  params: { category: string };
-}) {
+export async function generateStaticParams() {
   const gitHubApiInstance = await GitHubApi.getInstance();
-  const blogsMetadata: IssueItem[] =
+  const reviewItems: IssueItem[] =
     gitHubApiInstance.getGithubIssuesByCat("review");
-  const filteredReviews = filterReviewByContentType(blogsMetadata, category);
-  const slugList: { slug: string }[] = filteredReviews.map((blog) => ({
-    slug: blog.slug,
-  }));
-  console.log({
-    category: category,
-    slugList: slugList
-  })
-
+  const slugList: {
+    slug: string;
+    category: string;
+  }[] = reviewItems.map((review) => {
+    const { reviewType, slug } = extractTagDetails(review.tag);
+    return {
+      slug: slug || review.slug,  // Fallback to review.slug if not found in tags
+      category: reviewType || "unknown"  // Fallback to "unknown" if not found in tags
+    };
+  });
   return slugList;
 }
 

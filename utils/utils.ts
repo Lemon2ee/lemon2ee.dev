@@ -43,3 +43,18 @@ export const reviewNavItems: { [key: string]: { name: string } } = {
     name: "movie",
   },
 };
+
+export function extractTagDetails(tags: string[]): { reviewType: string, slug: string } {
+  let reviewType = "";
+  let slug = "";
+
+  tags.forEach(tag => {
+    if (tag.startsWith("review-type:")) {
+      reviewType = tag.split(":")[1];
+    } else if (tag.startsWith("slug:")) {
+      slug = tag.split(":")[1];
+    }
+  });
+
+  return { reviewType, slug };
+}
