@@ -1,5 +1,5 @@
 import GitHubApi, { IssueItem } from "@/utils/githubApi";
-import {filterReviewByContentType, parseReviewBody} from "@/utils/utils";
+import {filterReviewByContentType, parseReviewBody, reviewNavItems} from "@/utils/utils";
 import Image from "next/image";
 import Link from 'next/link'
 
@@ -8,6 +8,12 @@ type Props = {
         category: string,
     };
 };
+
+export async function generateStaticParams() {
+    return Object.keys(reviewNavItems).map((key: string) => ({
+        category: reviewNavItems[key].name,
+    }));
+}
 
 export default async function ReviewPage({ params }: Props) {
     const gitHubApiInstance = await GitHubApi.getInstance();
