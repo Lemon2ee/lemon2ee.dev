@@ -31,3 +31,15 @@ export function parseReviewBody(body: string) {
 export function filterReviewByContentType(reviews: IssueItem[], type: string): IssueItem[] {
   return reviews.filter(issue => issue.tag.some(tag => tag.startsWith(`review-type:${type}`)));
 }
+
+export const reviewNavItems: { [key: string]: { name: string } } = {
+  "/reviews/game": {
+    name: "game",
+  },
+  "/reviews/anime": {
+    name: "anime",
+  },
+  "/reviews/movie": {
+    name: "movie",
+  },
+};
