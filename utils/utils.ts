@@ -1,3 +1,5 @@
+import {IssueItem} from "@/utils/githubApi";
+
 export function isSingleLine(str: string): boolean {
   return !/\r\n|\n/.test(str);
 }
@@ -24,4 +26,8 @@ export function parseReviewBody(body: string) {
   const imageUrl = lines[4].match(/\(([^)]+)\)/)?.[1] || "";
   const content = lines.slice(6).join("\n").trim().replace(/\n/g, "<br>");
   return { rating, bar_bg_color, bar_color, headerImgUrl, imageUrl, content };
+}
+
+export function filterReviewByContentType(reviews: IssueItem[], type: string): IssueItem[] {
+  return reviews.filter(issue => issue.tag.some(tag => tag.startsWith(`review-type:${type}`)));
 }

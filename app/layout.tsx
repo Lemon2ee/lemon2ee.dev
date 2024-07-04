@@ -13,6 +13,24 @@ export const metadata: Metadata = {
 
 const cx = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
+const navItems = {
+    "/": {
+        name: "about me",
+    },
+    "/profile": {
+        name: "profile",
+    },
+    "/blog": {
+        name: "blog",
+    },
+    "/music": {
+        name: "playlists",
+    },
+    "/reviews/game": {
+        name: "reviews",
+    },
+};
+
 export default function RootLayout({
   children,
 }: {
@@ -23,7 +41,7 @@ export default function RootLayout({
       <body
         className={"px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased"}
       >
-        <Navbar />
+        <Navbar navItems={navItems} />
         {children}
         <Analytics />
         <SpeedInsights />
