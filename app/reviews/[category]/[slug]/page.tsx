@@ -29,7 +29,7 @@ export async function generateStaticParams({
 }) {
   const gitHubApiInstance = await GitHubApi.getInstance();
   const blogsMetadata: IssueItem[] =
-    gitHubApiInstance.getGithubIssuesByCat("reviews");
+    gitHubApiInstance.getGithubIssuesByCat("review");
   const filteredReviews = filterReviewByContentType(blogsMetadata, category);
   const slugList: { slug: string }[] = filteredReviews.map((blog) => ({
     slug: blog.slug,
