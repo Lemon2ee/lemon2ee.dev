@@ -34,7 +34,10 @@ export async function generateStaticParams({
   const slugList: { slug: string }[] = filteredReviews.map((blog) => ({
     slug: blog.slug,
   }));
-  console.log(slugList)
+  console.log({
+    category: category,
+    slugList: slugList
+  })
 
   return slugList;
 }
