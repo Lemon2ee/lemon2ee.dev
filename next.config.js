@@ -8,7 +8,28 @@ const nextConfig = {
     serverComponentsExternalPackages: ["shiki", "vscode-oniguruma"],
   },
   images: {
-    domains: ["raw.githubusercontent.com", "flowbite.s3.amazonaws.com", "github.com", "shared.cloudflare.steamstatic.com"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'flowbite.s3.amazonaws.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'github.com',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'shared.cloudflare.steamstatic.com',
+        pathname: '/**',
+      },
+    ],
   },
   // Optionally, add any other Next.js config below
 };

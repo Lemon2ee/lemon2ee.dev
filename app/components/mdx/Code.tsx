@@ -11,7 +11,7 @@ export async function Code({ children, ...props }: any) {
   }
 
   // right now it would be pre->code->pre(shiki)->code(shiki), might be better to remove the pre tag
-  return <code dangerouslySetInnerHTML={{ __html: html }} {...props} />;
+  return <span dangerouslySetInnerHTML={{ __html: html }} {...props} />;
 }
 
 function removePreTag(htmlString: string): string {

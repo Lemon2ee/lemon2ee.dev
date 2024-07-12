@@ -14,6 +14,7 @@ import { RoundedImage } from "@/app/components/mdx/Image";
 import GitHubApi, { IssueItem } from "@/utils/githubApi";
 import CommentSection from "@/app/components/comment/giscus";
 import { Metadata } from "next";
+import CustomQuote from "@/app/components/mdx/Quote";
 
 const components: MDXComponents = {
   h1: Heading.H1,
@@ -27,6 +28,7 @@ const components: MDXComponents = {
   ul: CustomUnorderedList,
   ol: CustomOrderedList,
   Image: RoundedImage,
+  blockquote: CustomQuote,
 };
 
 type Props = {

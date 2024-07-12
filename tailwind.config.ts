@@ -47,16 +47,16 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       typography: ({ theme }: any) => ({
+        quoteless: {
+          css: {
+            'blockquote p:first-of-type::before': { content: 'none' },
+            'blockquote p:first-of-type::after': { content: 'none' },
+          },
+        },
         custom: {
           css: {
-            code: {
-              "&::before": {
-                content: '"" !important',
-              },
-              "&::after": {
-                content: '"" !important',
-              },
-            },
+            "blockquote p:first-of-type::before": { content: 'none' },
+            "blockquote p:first-of-type::after": { content: 'none' },
             "--tw-prose-body": theme("colors.neutral[800]"),
             "--tw-prose-headings": theme("colors.neutral[900]"),
             "--tw-prose-lead": theme("colors.neutral[700]"),

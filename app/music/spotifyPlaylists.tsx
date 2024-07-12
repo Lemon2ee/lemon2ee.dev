@@ -1,4 +1,7 @@
+'use client'
+
 import React from 'react';
+import IFrame from "@/app/components/review/iframe";
 
 interface SpotifyEmbedProps {
     srcList: string[];
@@ -14,7 +17,7 @@ const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ srcList }) => {
             (使用Iframe内嵌，国内用户不一定能加载，抱歉)
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
                 {srcList.map((src, index) => (
-                    <iframe
+                    <IFrame
                         key={index}
                         style={{borderRadius: '12px'}}
                         src={src}
@@ -23,7 +26,7 @@ const SpotifyEmbed: React.FC<SpotifyEmbedProps> = ({ srcList }) => {
                         allowFullScreen
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                         loading="lazy"
-                    ></iframe>
+                    ></IFrame>
                 ))}
             </div>
         </>

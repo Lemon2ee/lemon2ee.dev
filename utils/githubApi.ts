@@ -61,7 +61,6 @@ class GitHubApi {
   async fetchIssueBySlug(slug: string): Promise<IssueItem> {
     const issue = this.githubIssues.find(issue => issue.slug === slug);
     if (!issue) {
-      console.log(this.githubIssues);
       throw new Error(`No issue found for slug: ${slug}`);
     }
     return issue;
