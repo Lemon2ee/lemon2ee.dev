@@ -10,13 +10,14 @@ interface NavItem {
 
 interface NavbarProps {
   navItems: Record<string, NavItem>;
+  className?: string;
 }
 
-export function Navbar({ navItems }: NavbarProps) {
+export function Navbar({ navItems, className }: NavbarProps) {
   const currentPath = usePathname();
 
   return (
-    <aside className="-ml-[8px] mb-10 tracking-tight">
+    <aside className={`${className}`}>
       <div className="lg:sticky lg:top-20">
         <nav
           className="flex flex-row items-start relative px-0 pb-0 fade md:overflow-auto scroll-pr-6 md:relative"

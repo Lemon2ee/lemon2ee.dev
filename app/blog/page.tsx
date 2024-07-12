@@ -7,7 +7,7 @@ export default async function Blog() {
   const blogsMetadata = gitHubApiInstance.getGithubIssuesByCat("blog");
 
   return (
-    <div>
+    <div className={"mt-10"}>
       {blogsMetadata.map((post: IssueItem) => (
         <Link key={post.title} href={`/blog/${post.slug}`}>
           <div className={"py-4"}>

@@ -10,7 +10,7 @@ export default function ReviewsLayout({
   return (
     <>
       {/* Include shared UI here e.g. a header or sidebar */}
-      <Navbar navItems={reviewNavItems} />
+      <Navbar navItems={reviewNavItems} className={"-ml-[8px] mt-5 mb-8"} />
       {children}
     </>
   );

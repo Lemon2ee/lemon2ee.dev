@@ -23,9 +23,6 @@ const navItems = {
     "/blog": {
         name: "blog",
     },
-    "/music": {
-        name: "playlists",
-    },
     "/reviews/game": {
         name: "reviews",
     },
@@ -41,7 +38,7 @@ export default function RootLayout({
       <body
         className={"px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased"}
       >
-        <Navbar navItems={navItems} />
+        <Navbar navItems={navItems} className={"-ml-[8px] tracking-tight"} />
         {children}
         <Analytics />
         <SpeedInsights />
