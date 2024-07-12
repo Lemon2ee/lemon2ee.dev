@@ -81,7 +81,7 @@ export default async function Blog({
   return (
     <>
       <article
-        className={"prose pt-4 max-w-full prose-custom dark:prose-invert"}
+        className={"mt-14 prose max-w-full prose-custom dark:prose-invert"}
       >
         <MDXRemote
           source={combined}
