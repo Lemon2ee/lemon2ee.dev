@@ -3,6 +3,7 @@ import { Heading } from "@/app/components/mdx/Heading";
 import Paragraph from "@/app/components/mdx/Paragraph";
 import { Code } from "@/app/components/mdx/Code";
 import {
+  CustomLI,
   CustomOrderedList,
   CustomUnorderedList,
 } from "@/app/components/mdx/List";
@@ -22,4 +23,5 @@ export const components: MDXComponents = {
   ol: CustomOrderedList,
   Image: RoundedImage,
   blockquote: CustomQuote,
+  li: CustomLI,
 };
