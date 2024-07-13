@@ -47,7 +47,9 @@ class GitHubApi {
     }
 
     const resJson = await response.json();
-    this.githubIssues = this.sortBlogItemsByUpdatedAt(this.filterDataItems(resJson));
+    this.githubIssues = this.sortBlogItemsByCreatedAt(
+      this.filterDataItems(resJson),
+    );
   }
 
   getAllGithubIssues(): IssueItem[] {
@@ -55,11 +57,13 @@ class GitHubApi {
   }
 
   getGithubIssuesByCat(category: string): IssueItem[] {
-    return this.githubIssues.filter(issue => issue.tag.some(tag => tag.startsWith(`cat:${category}`)));
+    return this.githubIssues.filter((issue) =>
+      issue.tag.some((tag) => tag.startsWith(`cat:${category}`)),
+    );
   }
 
   async fetchIssueBySlug(slug: string): Promise<IssueItem> {
-    const issue = this.githubIssues.find(issue => issue.slug === slug);
+    const issue = this.githubIssues.find((issue) => issue.slug === slug);
     if (!issue) {
       throw new Error(`No issue found for slug: ${slug}`);
     }
@@ -67,7 +71,9 @@ class GitHubApi {
   }
 
   private filterSingleBlogItem(item: any): IssueItem {
-    const slugTag = item.labels.find((label: any) => label.name.startsWith("slug:"));
+    const slugTag = item.labels.find((label: any) =>
+      label.name.startsWith("slug:"),
+    );
     const slug = slugTag ? slugTag.name.substring(5) : "";
 
     return {
@@ -87,8 +93,11 @@ class GitHubApi {
     return data.map(this.filterSingleBlogItem);
   }
 
-  private sortBlogItemsByUpdatedAt(items: IssueItem[]): IssueItem[] {
-    return items.sort((a, b) => new Date(b.updated_at).getTime() - new Date(a.updated_at).getTime());
+  private sortBlogItemsByCreatedAt(items: IssueItem[]): IssueItem[] {
+    return items.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    );
   }
 }
 
