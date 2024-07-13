@@ -34,7 +34,7 @@ export function Navbar({ navItems, className }: NavbarProps) {
                   key={path}
                   href={path}
                   className={`transition-all flex align-middle relative py-1 px-2 ${
-                    isActive ? "text-cyan-200" : ""
+                    isActive ? "text-violet-600 dark:text-cyan-200" : ""
                   }`}
                 >
                   {name}

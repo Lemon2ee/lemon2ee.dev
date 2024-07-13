@@ -2,7 +2,15 @@
 
 import Giscus from "@giscus/react";
 
+export const isDarkModePreferred = () => {
+  if (typeof window !== 'undefined') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  return false; // Default to false if window is undefined (e.g., during SSR)
+};
+
 export default function CommentSection() {
+  const isDark = isDarkModePreferred()
   return (
     <Giscus
       id="comments"
@@ -15,9 +23,8 @@ export default function CommentSection() {
       reactionsEnabled="1"
       emitMetadata="0"
       inputPosition="top"
-      theme="dark"
+      theme={isDark ? "dark" : "light"}
       lang="en"
-      loading="lazy"
     />
   );
 }
