@@ -2,16 +2,16 @@ name: Handle Issue add or delete
 
 on:
   issues:
-    types: [opened, deleted]
+    types: [opened, deleted, edited]
 
 jobs:
   handle_issue:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
@@ -38,4 +38,6 @@ jobs:
             python maintenance.py --add
           elif [ "${{ github.event.action }}" == "deleted" ]; then
             python maintenance.py --delete
+          elif [ "${{ github.event.action }}" == "edited" ]; then
+            python maintenance.py --update
           fi

@@ -119,10 +119,14 @@ def handle_delete():
     delete_discussion()
     trigger_vercel_deploy()
 
+def handle_update():
+    trigger_vercel_deploy()
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Maintenance script to handle GitHub issues.')
     parser.add_argument('--add', action='store_true', help='Handle addition of a new issue.')
     parser.add_argument('--delete', action='store_true', help='Handle deletion of an issue.')
+    parser.add_argument('--update', action='store_true', help='Handle update of an issue.')
 
     args = parser.parse_args()
 
@@ -130,5 +134,7 @@ if __name__ == "__main__":
         handle_add()
     elif args.delete:
         handle_delete()
+    elif args.update:
+        handle_update()
     else:
         print("Please specify an action: --add or --delete")
