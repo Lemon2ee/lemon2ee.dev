@@ -21,7 +21,7 @@ export function ReviewCard({
   const widthPercentage = `${rating * 10}%`;
 
   return (
-    <div className="max-w-2xl border-neutral-700 bg-neutral-800 rounded-xl shadow-md overflow-hidden my-5">
+    <div className="max-w-2xl border-neutral-700 bg-neutral-800 rounded shadow-md overflow-hidden my-5">
       <div>
         <div>
           <Image

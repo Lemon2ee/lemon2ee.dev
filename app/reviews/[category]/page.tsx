@@ -40,7 +40,7 @@ export default async function ReviewPage({ params }: Props) {
               src={headerImgUrl}
               alt={review.title}
               style={{ objectFit: "cover" }}
-              className={"rounded-md"}
+              className={"rounded"}
             />
           </Link>
         );
