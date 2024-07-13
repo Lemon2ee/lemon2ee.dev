@@ -14,18 +14,18 @@ export const metadata: Metadata = {
 const cx = (...classes: string[]) => classes.filter(Boolean).join(" ");
 
 const navItems = {
-    "/": {
-        name: "about me",
-    },
-    "/profile": {
-        name: "profile",
-    },
-    "/blog": {
-        name: "blog",
-    },
-    "/reviews/game": {
-        name: "reviews",
-    },
+  "/": {
+    name: "about me",
+  },
+  "/profile": {
+    name: "profile",
+  },
+  "/blog": {
+    name: "blog",
+  },
+  "/reviews/game": {
+    name: "reviews",
+  },
 };
 
 export default function RootLayout({
@@ -36,7 +36,9 @@ export default function RootLayout({
   return (
     <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
       <body
-        className={"px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased"}
+        className={
+          "px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased min-h-screen"
+        }
       >
         <Navbar navItems={navItems} className={"-ml-[8px] tracking-tight"} />
         {children}

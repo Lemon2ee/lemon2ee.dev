@@ -30,7 +30,7 @@ export function ReviewCard({
             height={620}
             width={1920}
             alt={title}
-            style={{objectFit:"cover"}}
+            style={{ objectFit: "cover" }}
           />
         </div>
         <div className="p-8">

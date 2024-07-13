@@ -1,6 +1,6 @@
 import { ReviewCard } from "@/app/components/review/reviewCard";
 import GitHubApi, { IssueItem } from "@/utils/githubApi";
-import {extractTagDetails, parseReviewBody} from "@/utils/utils";
+import { extractTagDetails, parseReviewBody } from "@/utils/utils";
 import CommentSection from "@/app/components/comment/giscus";
 import { Metadata } from "next";
 
@@ -32,8 +32,8 @@ export async function generateStaticParams() {
   }[] = reviewItems.map((review) => {
     const { reviewType, slug } = extractTagDetails(review.tag);
     return {
-      slug: slug || review.slug,  // Fallback to review.slug if not found in tags
-      category: reviewType || "unknown"  // Fallback to "unknown" if not found in tags
+      slug: slug || review.slug, // Fallback to review.slug if not found in tags
+      category: reviewType || "unknown", // Fallback to "unknown" if not found in tags
     };
   });
   return slugList;

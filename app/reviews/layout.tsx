@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar } from "@/app/components/nav";
-import {reviewNavItems} from "@/utils/utils";
+import { reviewNavItems } from "@/utils/utils";
 
 export default function ReviewsLayout({
   children, // will be a page or nested layout
