@@ -21,7 +21,7 @@ export const components: MDXComponents = {
   code: Code,
   ul: CustomUnorderedList,
   ol: CustomOrderedList,
-  Image: RoundedImage,
+  img: RoundedImage,
   blockquote: CustomQuote,
   li: CustomLI,
 };

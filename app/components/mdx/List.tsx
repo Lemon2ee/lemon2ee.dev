@@ -1,11 +1,11 @@
 export function CustomUnorderedList({ children }: any) {
-  return <ul className="list-inside list-disc">{children}</ul>;
+  return <ul className="list-inside list-disc overflow-hidden">{children}</ul>;
 }
 
 export function CustomOrderedList({ children }: any) {
-  return <ul className="list-outside list-decimal">{children}</ul>;
+  return <ol className="list-outside list-decimal overflow-hidden">{children}</ol>;
 }
 
 export function CustomLI({ children }: any) {
-  return <li className={"text-ellipsis overflow-hidden"}>{children}</li>;
+  return <li className={"text-ellipsis"}>{children}</li>;
 }
