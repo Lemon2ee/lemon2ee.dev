@@ -6,6 +6,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Navbar } from "@/app/components/nav";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import Footer from "@/app/components/footer";
 
 export const metadata: Metadata = {
   title: "Lemon2ee",
@@ -35,13 +36,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
-      <body
-        className={
-          "px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased min-h-screen"
-        }
-      >
-        <Navbar navItems={navItems} className={"-ml-[8px] tracking-tight"} />
-        {children}
+      <body className={"min-h-screen"}>
+        <main className={
+          "px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased mb-auto"
+        }>
+          <Navbar navItems={navItems} className={"-ml-[8px] tracking-tight"} />
+          {children}
+        </main>
+
+        <Footer/>
         <Analytics />
         <SpeedInsights />
       </body>
