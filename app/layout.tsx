@@ -36,9 +36,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={cx(GeistSans.variable, GeistMono.variable)}>
-      <body className={"min-h-screen"}>
+      <body className={"min-h-screen flex-col flex items-center justify-center"}>
         <main className={
-          "px-5 py-10 lg:py-16 mx-auto max-w-3xl subpixel-antialiased mb-auto"
+          "px-5 py-10 lg:py-16 mx-auto max-w-3xl w-full subpixel-antialiased mb-auto"
         }>
           <Navbar navItems={navItems} className={"-ml-[8px] tracking-tight"} />
           {children}
