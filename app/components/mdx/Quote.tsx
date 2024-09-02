@@ -69,7 +69,8 @@ function extractAndCapitalize(text: any): string {
 }
 
 const CustomQuote = ({ children }: any) => {
-  console.log(children[1]?.props);
+  // TODO: for the custom quote to work, each there should be a new line symbol after the first line
+  // which the mdx engine use to parse the content into arrays. need to work on this later.
   const messageType = children[1]?.props?.children[0] || "[!TIP]";
   const { borderClassName, textClassName, component } =
     // @ts-ignore
