@@ -70,7 +70,7 @@ function extractAndCapitalize(text: any): string {
 
 const CustomQuote = ({ children }: any) => {
   const messageType = children[1]?.props?.children[0];
-  console.log(messageType);
+  console.log(children);
   const { borderClassName, textClassName, component } =
     // @ts-ignore
     messageStyles[messageType];
