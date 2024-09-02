@@ -73,7 +73,8 @@ const CustomQuote = ({ children }: any) => {
   const messageType = children[1]?.props?.children[0] || "[!TIP]";
   const { borderClassName, textClassName, component } =
     // @ts-ignore
-    messageStyles[messageType];
+    messageStyles[messageType] || {}; // Add a fallback to an empty object
+
 
   // Convert children to an array
   const childrenArray = React.Children.toArray(children);
